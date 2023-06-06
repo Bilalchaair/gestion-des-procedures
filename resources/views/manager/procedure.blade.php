@@ -201,14 +201,20 @@
 									
 								</div>
 								<!--end::Search-->
+                                <div >
+									<span>
+									<a href="{{ route('uploadprocedure') }}" >
+									<span class="buttoncss" >upload procedure </span>
+									</a>
+								    </span>	
+								</div>
                             
 								
 								
 							</div>
 							<!--end::Actions-->
                             <div class="menu-item px-5">
-                                
-
+                            
                             </div>
                             <!--end::Toolbar-->
 					
@@ -217,31 +223,36 @@
                         
 					</div>
 					<!--end::Toolbar-->
-					<div class="forms">
-                                    <form action="{{url('upload')}}" method="POST" enctype="multipart/form-data" class="select">
-                                         @csrf
-                                    <div class="labels">
-                                        <label>nom du procedure :</label>
-                                        <input type="text" name="name">
-                                    </div>
-                                    <div class="labels">
-                                        <label>file :</label>
-                                        <input type="file" name="file">
-                                    </div>
-                                    <div class="labels">
-										<select name="service_id"  >
-										@foreach($service as $data)
-                                            <option value="{{$data->id}}">{{$data->nom_service}}</option>
-										@endforeach	
-                                        </select>
-                                    </div>
-                                    <div >
-                                    <input type="submit" value="Submit" class="submit">
-                                    </div>
-
-
-                                </form>
-					        </div>
+                    <div class="forms">
+					<table class="styled-table">
+    					<thead>
+        					<tr>
+								<th>Id</th>
+								<th>Nom procedure </th>
+            					<th>file</th>
+                                <th>service_id</th>
+								<th>Action</th>
+       						 </tr>
+    					</thead>
+    				<tbody>
+						@foreach($procedure as $data)
+        					
+        					<tr class="active-row">
+								<td>{{$data->id}}</td>
+								<td>{{$data->nom_procedure}}</td>
+                                <td>{{$data->file}}</td>
+								<td>{{$data->service_id}}</td>
+								<td>
+								<a href="{{url('delete_procedure',$data->id)}}" class="btn">delete</a>
+								<a href="{{url('update_procedure',$data->id)}}" class="btn">update</a>
+								</td>
+        					</tr>
+						@endforeach
+        				<!-- and so on... -->
+    				</tbody>
+					</table>
+					</div>
+                    
 					<!--begin::Container-->
 					<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
 

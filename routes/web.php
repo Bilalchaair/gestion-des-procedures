@@ -74,7 +74,11 @@ route::post('edit_unite/{id}',[AdminController::class,'edit_unite'])->middleware
 
 
 route::get('upload_procedure',[ManagerController::class,'upload_procedure'])->middleware('auth')->name('upload_procedure');
+route::get('uploadprocedure',[ManagerController::class,'uploadprocedure'])->middleware('auth')->name('uploadprocedure');
 route::post('upload',[ManagerController::class,'upload'])->middleware('auth')->name('upload');
+route::get('delete_procedure/{id}',[ManagerController::class,'delete_procedure'])->middleware('auth')->name('delete_procedure');
+route::get('update_procedure/{id}',[ManagerController::class,'update_procedure'])->middleware('auth')->name('update_procedure');
+route::post('edit_procedure/{id}',[ManagerController::class,'edit_procedure'])->middleware('auth')->name('edit_procedure');
 
 
 route::get('showprocedure',[InterneController::class,'showprocedure'])->middleware('auth')->name('showprocedure');

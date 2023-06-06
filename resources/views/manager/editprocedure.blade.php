@@ -4,15 +4,16 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
-		<link href="adminassets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo asset('adminassets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="adminassets/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="adminassets/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="adminassets/style.css">
+		<link href="<?php echo asset('adminassets/dist/assets/plugins/global/plugins.bundle.css')?>" rel="stylesheet" type="text/css" />
+		<link href="<?php echo asset('adminassets/dist/assets/css/style.bundle.css')?>" rel="stylesheet" type="text/css" />
+        
+        <link rel="stylesheet" href="<?php echo asset('adminassets/style.css')?>">>
 		<!--end::Global Stylesheets Bundle-->	
         <!--begin::Root-->
-		<body id="kt_body" style="background-image: url(adminassets/dist/assets/media/patterns/header-bg.png)" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+		<body id="kt_body" style="background-image: url(<?php echo asset('adminassets/dist/assets/media/patterns/header-bg.png')?>)" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
         <div class="d-flex flex-column flex-root">
 			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
@@ -39,8 +40,8 @@
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
 								<a href="#">
-									<img alt="Logo" src="adminassets/dist/assets/media/logos/logo-light.svg" class="h-15px h-lg-20px logo-default" />
-									<img alt="Logo" src="adminassets/dist/assets/media/logos/logo-default.svg" class="h-15px h-lg-20px logo-sticky" />
+									<img alt="Logo" src="<?php echo asset('adminassets/dist/assets/media/logos/logo-light.svg')?>" class="h-15px h-lg-20px logo-default" />
+									<img alt="Logo" src="<?php echo asset('adminassets/dist/assets/media/logos/logo-default.svg')?>" class="h-15px h-lg-20px logo-sticky" />
 								</a>
 							</div>
 							<!--end::Header Logo-->
@@ -218,11 +219,11 @@
 					</div>
 					<!--end::Toolbar-->
 					<div class="forms">
-                                    <form action="{{url('upload')}}" method="POST" enctype="multipart/form-data" class="select">
+                                    <form action="{{url('edit_procedure',$procedure->id)}}" method="POST" enctype="multipart/form-data" class="select">
                                          @csrf
                                     <div class="labels">
                                         <label>nom du procedure :</label>
-                                        <input type="text" name="name">
+                                        <input type="text" name="nom_procedure" value="{{$procedure->nom_procedure}}">
                                     </div>
                                     <div class="labels">
                                         <label>file :</label>
@@ -254,17 +255,18 @@
 			<!--end::Page-->
 		</div>
 		<!--end::Root-->
-        <script>var hostUrl = "adminassets/dist/assets/";</script>
+        <script>var hostUrl = "<?php echo asset('adminassets/dist/assets/')?>";</script>
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="adminassets/dist/assets/plugins/global/plugins.bundle.js"></script>
-		<script src="adminassets/dist/assets/js/scripts.bundle.js"></script>
+		<script src="<?php echo asset('adminassets/dist/assets/plugins/global/plugins.bundle.js')?>"></script>
+		<script src="<?php echo asset('adminassets/dist/assets/js/scripts.bundle.js')?>"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Vendors Javascript(used by this page)-->
-		<script src="adminassets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+		<script src="<?php echo asset('adminassets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')?>"></script>
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="adminassets/dist/assets/js/custom/widgets.js"></script>
+		<script src="<?php echo asset('adminassets/dist/assets/js/custom/widgets.js')?>"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
-        </body>
+	</body>
+	<!--end::Body-->
