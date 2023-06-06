@@ -143,6 +143,7 @@ class MultiStepForm extends Component
             );
 
             procedure::insert($values);
+            return redirect()->route('showprocedure')->with('success','votre procedure a bien ete creee');
       }    
   }
 

@@ -13,7 +13,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="">
-		<title>Gestion Des Procedures</title>
+	<title>Gestion Des Procedures</title>
 		<meta name="description" content="Ceres admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="keywords" content="Ceres theme, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,24 +23,23 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:title" content=" Admin Dashboard Theme" />
 		<meta property="og:url" content="https://keenthemes.com/products/ceres-html-pro" />
 		<meta property="og:site_name" content="Keenthemes | Ceres HTML Free" />
-        <base href="/public">
 		<link rel="canonical" href="Https://preview.keenthemes.com/ceres-html-free" />
 		<link rel="shortcut icon" href="adminassets/dist/assets/media/logos/favicon.ico" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
-		<link href="/public/adminassets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo asset('adminassets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="public/adminassets/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="public/adminassets/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo asset('adminassets/dist/assets/plugins/global/plugins.bundle.css')?>" rel="stylesheet" type="text/css" />
+		<link href="<?php echo asset('adminassets/dist/assets/css/style.bundle.css')?>" rel="stylesheet" type="text/css" />
         
-        <link rel="stylesheet" href="{{ asset('public/adminassets/style1.css')}}">
+        <link rel="stylesheet" href="<?php echo asset('adminassets/style1.css')?>">
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->
-    <body id="kt_body" style="background-image: url(public/adminassets/dist/assets/media/patterns/header-bg.png)" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+    <body id="kt_body" style="background-image: url(<?php echo asset('adminassets/dist/assets/media/patterns/header-bg.png')?>)" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
 		
         <!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
@@ -69,8 +68,8 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
 								<a href="#">
-									<img alt="Logo" src="public/adminassets/dist/assets/media/logos/logo-light.svg" class="h-15px h-lg-20px logo-default" />
-									<img alt="Logo" src="public/adminassets/dist/assets/media/logos/logo-default.svg" class="h-15px h-lg-20px logo-sticky" />
+									<img alt="Logo" src="<?php echo asset('adminassets/dist/assets/media/logos/logo-light.svg')?>" class="h-15px h-lg-20px logo-default" />
+									<img alt="Logo" src="<?php echo asset('adminassets/dist/assets/media/logos/logo-default.svg')?>" class="h-15px h-lg-20px logo-sticky" />
 								</a>
 							</div>
 							<!--end::Header Logo-->
@@ -99,17 +98,79 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">procedure</span>
+													<a class="menu-title" href="{{ route('hopital') }}" >
+														<span class="menu-title">Hôpital</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">Hopital</span>
+													<a class="menu-title" href="{{ route('division') }}" >
+														<span class="menu-title">Division</span>
 													</a>
 											</span>
+											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('service') }}" >
+														<span class="menu-title">service</span>
+													</a>
+											</span>
+											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('unite') }}" >
+														<span class="menu-title">unité </span>
+													</a>
+											</span>
+											</div>
+											<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+												<span class="menu-link py-3">
+													<span class="menu-title">Hôpital</span>
+													<span class="menu-arrow d-lg-none"></span>
+												</span>
+												<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">Direction générale</span>
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#" data-kt-page="pro">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">Hôpital des spécialités
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#" data-kt-page="pro">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">Hôpital mère-enfant 
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#" data-kt-page="pro">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">centre d'oncologie
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">Hôpital psychiatrique</span>
+														</a>
+													</div>
+												</div>
 											</div>
 										</div>
 										<!--end::Menu-->
@@ -126,7 +187,7 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-												<img alt="Pic" src="public/adminassets/dist/assets/media/avatars/150-26.jpg" />
+												<img alt="Pic" src="adminassets/dist/assets/media/avatars/150-26.jpg" />
 											</div>
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -136,7 +197,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--end::Menu separator-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">
-													<a href="public/adminassets/dist/account/overview.html" class="menu-link px-5">My Profile</a>
+													<a href="adminassets/dist/account/overview.html" class="menu-link px-5">My Profile</a>
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
@@ -264,17 +325,17 @@ License: For each use you must have a valid license purchased only from above li
 		</div>
 		<!--end::Scrolltop-->
 		<!--end::Main-->
-		<script>var hostUrl = "public/adminassets/dist/assets/";</script>
+		<script>var hostUrl = "<?php echo asset('adminassets/dist/assets/')?>";</script>
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="public/adminassets/dist/assets/plugins/global/plugins.bundle.js"></script>
-		<script src="public/adminassets/dist/assets/js/scripts.bundle.js"></script>
+		<script src="<?php echo asset('adminassets/dist/assets/plugins/global/plugins.bundle.js')?>"></script>
+		<script src="<?php echo asset('adminassets/dist/assets/js/scripts.bundle.js')?>"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Vendors Javascript(used by this page)-->
-		<script src="public/adminassets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+		<script src="<?php echo asset('adminassets/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')?>"></script>
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="public/adminassets/dist/assets/js/custom/widgets.js"></script>
+		<script src="<?php echo asset('adminassets/dist/assets/js/custom/widgets.js')?>"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

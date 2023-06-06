@@ -11,7 +11,8 @@
 		<link href="adminassets/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="adminassets/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->	
-        <!--begin::Root-->
+		
+<!--begin::Root-->
 		<body id="kt_body" style="background-image: url(adminassets/dist/assets/media/patterns/header-bg.png)" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
         <div class="d-flex flex-column flex-root">
 			<!--begin::Page-->
@@ -207,7 +208,7 @@
 						<!--begin::Container-->
 						<div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
 							<!--begin::Title-->
-							<h3 class="text-white fw-bolder fs-2qx me-5">les procedures</h3>
+							<h3 class="text-white fw-bolder fs-2qx me-5">Liste des Procédures</h3>
 							<!--begin::Title-->
 							<!--begin::Actions-->
 							<div class="d-flex align-items-center flex-wrap py-2">
@@ -256,7 +257,7 @@
                                 <div >
 									<span  >
 									<a href="{{ route('addprocedure') }}" >
-									<span class="buttoncss" >cree procedure</span>
+									<span class="buttoncss" >Créer procédure</span>
 									</a>
 								</span>	
 								</div>
@@ -269,9 +270,75 @@
 					</div>
 					<!--end::Toolbar-->
 					<!--begin::Container-->
-					<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+				
 
+
+				
+					<div class="forms">
+						@if(Session::has('success'))
+							<div class="alert alert-success" role="alert" id="alert">
+								
+								{{ Session::get('success') }}
+							</div>
+						@endif
+						@if(Session::has('error'))
+							<div class="alert alert-danger" role="alert" id="alert">
+								
+								{{ Session::get('error') }}
+							</div>
+						@endif
+						<table class="table table-hover">
+							<thead class="table-primary">
+								<tr>
+									<th> <strong># </strong></th>
+									<th> <strong>Titre </strong></th>
+									<th><strong> Code_Référence </strong></th>
+									<th> <strong>Date_Création </strong></th>
+									<th> <strong>Rédacteur </strong></th>
+									<th> <strong>Action </strong></th>
+									<th> <strong>État</strong></th>
+								</tr>
+							</thead>
+							<tbody>
+								@if($procedure->count() > 0)
+								@foreach($procedure as $rs)
+									<tr>
+										<td class="align-middle">{{ $loop->iteration }}</td>
+										<td class="align-middle">{{ $rs->nom_proc }}</td>
+										<td class="align-middle">{{ $rs->reference_code }}</td>
+										<td class="align-middle">{{ $rs->date_creation }}</td>
+										<td class="align-middle">{{ $rs->nom_redacteur }}</td>
+										<td class="align-middle">
+											<div class="btn-group" role="group" aria-label="Basic example">
+												<a href="" type="button" class="btn btn-secondary">Detail</a>
+												<a href="{{url('modifierprocedure',$rs->id)}}" type="button" class="btn btn-warning">Edit</a>
+												<a href="{{url('delete_proc',$rs->id)}}" type="button" class="btn btn-danger">Delete</a>
+												<a href="{{url('verifierprocedure',$rs->id)}}" type="button" class="btn btn-info">Vérifier</a>
+												<a href="{{url('approuverprocedure',$rs->id)}}" type="button" class="btn btn-success">Approuver</a>
+												@if (!is_null($rs->nom_ver)  && !is_null($rs->nom_app))
+												<a href="{{url('exporterprocedure',$rs->id)}}" type="button" class="btn btn-secondary">exporter</a>
+												@endif
+
+											</div>
+										</td>
+										<td class="align-middle">@if (is_null($rs->nom_ver)  && is_null($rs->nom_app))
+											Rédigée
+											@elseif (!is_null($rs->nom_ver)  && is_null($rs->nom_app))
+											Vérifiée
+											@elseif (!is_null($rs->nom_ver)  && !is_null($rs->nom_app))
+                                            Approuvée
+										@endif</td>
+									</tr>
+								@endforeach
+							@else
+								<tr>
+									<td class="text-center" colspan="5">Procedure not found</td>
+								</tr>
+							@endif
+							</tbody>
+						</table>
 					</div>
+				
 					<!--end::Container-->
 					<!--begin::Footer-->
 					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
@@ -288,6 +355,19 @@
 			</div>
 			<!--end::Page-->
 		</div>
+	
+
+		<script
+		src="https://code.jquery.com/jquery-3.7.0.js"
+		integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+		crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function(){
+				  setTimeout(function() {
+					  $('#alert').fadeOut('fast');
+				  }, 4000);
+			  });
+		  </script>
 		<!--end::Root-->
         <script>var hostUrl = "adminassets/dist/assets/";</script>
 		<!--begin::Javascript-->

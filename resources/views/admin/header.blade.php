@@ -55,8 +55,29 @@
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
-													<a class="menu-title" href="#" >
-														<span class="menu-title">procédure</span>
+													<a class="menu-title" href="{{ route('hopital') }}" >
+														<span class="menu-title">Hôpital</span>
+													</a>
+											</span>
+											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('division') }}" >
+														<span class="menu-title">Division</span>
+													</a>
+											</span>
+											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('service') }}" >
+														<span class="menu-title">service</span>
+													</a>
+											</span>
+											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('unite') }}" >
+														<span class="menu-title">unité </span>
 													</a>
 											</span>
 											</div>

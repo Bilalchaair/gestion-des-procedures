@@ -97,17 +97,79 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">procedure</span>
+													<a class="menu-title" href="{{ route('hopital') }}" >
+														<span class="menu-title">Hôpital</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">Hopital</span>
+													<a class="menu-title" href="{{ route('division') }}" >
+														<span class="menu-title">Division</span>
 													</a>
 											</span>
+											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('service') }}" >
+														<span class="menu-title">service</span>
+													</a>
+											</span>
+											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('unite') }}" >
+														<span class="menu-title">unité </span>
+													</a>
+											</span>
+											</div>
+											<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
+												<span class="menu-link py-3">
+													<span class="menu-title">Hôpital</span>
+													<span class="menu-arrow d-lg-none"></span>
+												</span>
+												<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">Direction générale</span>
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#" data-kt-page="pro">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">Hôpital des spécialités
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#" data-kt-page="pro">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">Hôpital mère-enfant 
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#" data-kt-page="pro">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">centre d'oncologie
+														</a>
+													</div>
+													<div class="menu-item">
+														<a class="menu-link py-3" href="#">
+															<span class="menu-bullet">
+																<span class="bullet bullet-dot"></span>
+															</span>
+															<span class="menu-title">Hôpital psychiatrique</span>
+														</a>
+													</div>
+												</div>
 											</div>
 										</div>
 										<!--end::Menu-->

@@ -18,8 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('usertype')->default('user');
-            $table->string('hopital_id');
-            $table->string('service_id');
+           
             $table->rememberToken();
             $table->timestamps();
         });

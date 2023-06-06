@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Procedurefile;
+use App\Models\Procedurefiles;
 
 class ManagerController extends Controller
 {
@@ -13,7 +13,7 @@ class ManagerController extends Controller
     }
     public function upload(Request $request)
     {
-        $procedure= new procedurefiles;
+        $procedure= new Procedurefiles;
         $procedure->nom_procedure = $request->name;
         $file=$request->file;
         $filename=time().'.'.$file->getClientOriginalExtension();
@@ -21,6 +21,7 @@ class ManagerController extends Controller
         $procedure->file=$filename;
         $procedure->service_id=$request->service;
         $procedure->save();
+        return redirect('upload_procedure');
 
         
     }

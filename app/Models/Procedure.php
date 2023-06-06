@@ -12,6 +12,7 @@ class Procedure extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'service_id',
         'reference_code',
         'edition',
         'date_creation',
@@ -33,4 +34,8 @@ class Procedure extends Model
         'logigramme'
 
     ];
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }
