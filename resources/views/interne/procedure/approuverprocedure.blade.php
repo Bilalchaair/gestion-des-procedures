@@ -212,6 +212,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="col mb-3">
 									<label class="form-label">Nom de l'approbateur</label>
 									<input type="text" name="nom_app" class="form-control" placeholder="Nom" value="{{ $procedure->nom_app }}" required>
+									<span class="text-danger">@error('nom_app'){{ $message }}@enderror</span>
 								</div>
 					
 							</div>

@@ -214,6 +214,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="col mb-3">
 									<label class="form-label">Nom du Vérificateur</label>
 									<input type="text" name="nom_ver" class="form-control" placeholder="Nom" value="{{ $procedure->nom_ver }}" required>
+									<span class="text-danger">@error('nom_ver'){{ $message }}@enderror</span>
 								</div>
 					
 							</div>
