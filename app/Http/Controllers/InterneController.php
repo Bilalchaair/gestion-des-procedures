@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Procedure;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -13,7 +14,7 @@ class InterneController extends Controller
 {
     public function showprocedure()
    {
-    $procedure = Procedure::orderBy('created_at', 'DESC')->get();
+    $procedure = Procedure::paginate(1);
     return view('interne.procedure.home',compact('procedure'));
    }
    public function addprocedure()
@@ -67,15 +68,17 @@ class InterneController extends Controller
    public function modifierprocedure($id)
    {
     $procedure = Procedure::find($id);
-    return view('interne.procedure.modifierprocedure', compact('procedure'));
+    $service = Service::all();
+    return view('interne.procedure.modifierprocedure', compact('procedure','service'));
    }
    public function modifier_proc(Request $request,$id)
    {
-   
+
     $data=Procedure::find($id);
     if(is_null($request->logigramme)){
     $data->nom_redacteur=$request->nom_redacteur;
     $data->fonction_redacteur=$request->fonction_redacteur;
+    $data->service_id=$request->service_id;
     $data->nom_proc=$request->nom_proc;
     $data->reference_code=$request->reference_code;
     $data->date_creation=$request->date_creation;
@@ -85,6 +88,7 @@ class InterneController extends Controller
     $data->abreviation=$request->abreviation;
     $data->description=$request->description;
     $data->enregistrement=$request->enregistrement;
+    $data->enregistrement_code=$request->enregistrement_code;
     $data->save();
     return redirect('showprocedure')->with('success','Procédure modifiée');
     }else {
@@ -93,6 +97,7 @@ class InterneController extends Controller
         if($upload_logi){
     $data->nom_redacteur=$request->nom_redacteur;
     $data->fonction_redacteur=$request->fonction_redacteur;
+    $data->service_id=$request->service_id;
     $data->nom_proc=$request->nom_proc;
     $data->reference_code=$request->reference_code;
     $data->date_creation=$request->date_creation;
@@ -103,6 +108,7 @@ class InterneController extends Controller
     $data->description=$request->description;
     $data->logigramme=$logi_name;
     $data->enregistrement=$request->enregistrement;
+    $data->enregistrement_code=$request->enregistrement_code;
     $data->save();
     return redirect('showprocedure')->with('success','Procédure modifiée');
 }

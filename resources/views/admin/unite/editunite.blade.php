@@ -67,11 +67,12 @@ License: For each use you must have a valid license purchased only from above li
 							<!--end::Heaeder menu toggle-->
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
-                            <a href="#">
-									<img alt="Logo" src="<?php echo asset('adminassets/dist/assets/media/logos/logo-light.svg')?>" class="h-15px h-lg-20px logo-default" />
-									<img alt="Logo" src="<?php echo asset('adminassets/dist/assets/media/logos/logo-default.svg')?>" class="h-15px h-lg-20px logo-sticky" />
+								<a href="#">
+									<img alt="Logo" src="<?php echo asset('assets/chulogo.png')?>" class="h-15px h-lg-50px logo-default" />
+									<img alt="Logo" src="<?php echo asset('assets/chulogo.png')?>" class="h-15px h-lg-50px logo-sticky" />
 								</a>
 							</div>
+							
 							<!--end::Header Logo-->
 							<!--begin::Wrapper-->
 							<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
@@ -187,7 +188,7 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-												<img alt="Pic" src="adminassets/dist/assets/media/avatars/150-26.jpg" />
+												<img alt="Pic" src="assets/user.png" />
 											</div>
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">

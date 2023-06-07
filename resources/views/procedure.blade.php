@@ -9,6 +9,37 @@
 	<link href="adminassets/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="exxterne/style1.css">
 	<link rel="stylesheet" href="adminassets/style.css">
+	<style>
+		.sidebar {
+  width: 200px;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.sidebar ul ul {
+  display: none;
+  padding-left: 20px;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.table-container {
+  margin-left: 220px; /* Adjust the margin as needed */
+}
+
+	</style>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -113,106 +144,63 @@
 			</div>
 		</div>
 	</nav>
-	
-	
-	
-	
 </header>
 
 <main>
-	<div id="menu-toggle">
-		<div id="hamburger">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-		<div id="cross">
-			<span></span>
-			<span></span>
-		</div>
-	</div>
-	<div>
-		
-		<div id="map1"  style="display: none ;">
-		<table class="styled-table">
-    					<thead>
-        					<tr>
-								<th>nom procedure</th>
-            					<th>file</th>
-								<th>Action</th>
-       						 </tr>
-    					</thead>
-    				<tbody>
-					@foreach($procedurefiles10 as $procedurefiles10)
-        					
-        					<tr class="active-row">
-								<td>{{$procedurefiles10->nom_procedure}}</td>
-								<td>{{$procedurefiles10->file}}</td>
-								
-								<td>
-									<a href="{{url('/view',$procedurefiles10->id)}}" class="btn">view</a>
-									<a href="{{url('/download',$procedurefiles10->file)}}" class="btn">download</a>
-								</td>
-        					</tr>
-						@endforeach
-        				<!-- and so on... -->
-    				</tbody>
-					</table>
-			
-		</div>
-		
-	</div>
-	<!-- Sidebar Menu -->
-    <div class="sidebar-menu">
-        <a href="#" class="sidebar-menu-close"><span></span></a>
-        <ul>
-            
-            <li><a href="#" target="_blank">Direction générale</a>
-                <ul class="sub-menu">
-                    <li><a href="#" target="_blank">Division des affaires médicales et des soins infirmiers</a>
-                        <ul class="sub-menu">
-                            <li><a   target="_blank">service des affaires médicales</a></li>
-                            <li><a href="#" target="_blank">service des soins infirmiers et technique de santé</a></li>
-                            <li><a href="#" target="_blank">service pharmacie centrale</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" target="_blank">Division de patrimoine hospitalier et l'ingénierie</a>
-                        <ul class="sub-menu">
-                            <li><a href="#" target="_blank">service de bâtiments et des installations techniques</a></li>
-                            <li><a href="#" target="_blank">service du patrimoine, du parc automobile et des systèmes en réseaux</a></li>
-                            <li><a href="#" target="_blank">service des équipements et de maintenance</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" target="_blank">Division du capital humaine de formation et de coopération</a>
-                        <ul class="sub-menu">
-                            <li><a href="#" target="_blank">service de gestion des carrières</a></li>
-                            <li><a href="#" target="_blank">service de formation continue et gestion des compétences</a></li>
-                            <li><a href="#" target="_blank">service des affaires juridiques et sociales</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" target="_blank">Division des affaires financières</a>
-                        <ul class="sub-menu">
-                            <li><a href="#" target="_blank">service de comptabilité</a></li>
-                            <li><a href="#" target="_blank">service des marchés</a></li>
-                            <li><a href="#" target="_blank">service de recouvrements et recette</a></li>
-                            <li><a href="#" target="_blank">service du budget</a></li>
-                        </ul>
-                    </li>
-                    <li><a onclick="mapQ()" target="_blank">service de qualité et de gestion des risques</a></li>
-                    <li><a href="#" target="_blank">service d'audit et de contrôle de gestion</a></li>
-                    <li><a href="#" target="_blank">service de communication de coopération et de partenariat</a></li>
-                    <li><a href="#" target="_blank">service d'enseignement de recherche et d'innovation</a></li>
-                    <li><a href="#" target="_blank">service de technologie et de l'information</a></li>
+<div class="sidebar">
+    <ul>
+        @foreach ($hopitals as $hopital)
+            <li>
+                <h2>{{ $hopital->nom_hopital }}</h2>
+                <ul>
+                    @foreach ($hopital->divisions as $division)
+                        <li>
+                            <h3>{{ $division->nom_division }}</h3>
+                            <ul>
+                                @foreach ($division->services as $service)
+                                    <li>
+                                        <h4>{{ $service->nom_service }}</h4>
+                                        <ul>
+                                            @foreach ($service->procedurefiles as $procedurefile)
+                                                <li>
+                                                    <a href="{{ $procedurefile->file }}">{{ $procedurefile->nom_procedure }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
-            <li><a href="#" target="_blank">Hôpital des spécialités</a></li>
-            <li><a href="#" target="_blank">Hôpital mère-enfant</a></li>
-            <li><a href="#" target="_blank">centre d'oncologie</a></li>
-            <li><a href="#" target="_blank">Hôpital psychiatrique</a></li>
-        </ul>
-    </div>
+        @endforeach
+    </ul>
+</div>
 
-	
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Nom Procedure</th>
+            <th>Download</th>
+        </tr>
+        @foreach ($hopitals as $hopital)
+            @foreach ($hopital->divisions as $division)
+                @foreach ($division->services as $service)
+                    @foreach ($service->procedurefiles as $procedurefile)
+                        <tr>
+                            <td>{{ $procedurefile->nom_procedure }}</td>
+                            <td>
+                                <a href="{{ $procedurefile->file }}" download>Download PDF</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endforeach
+            @endforeach
+        @endforeach
+    </table>
+</div>
+
 </main>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script><script  src="externe/script.js"></script>
@@ -227,5 +215,18 @@
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="adminassets/dist/assets/js/custom/widgets.js"></script>
+		<script>// Add an event listener to the sidebar heading elements to toggle visibility of sub-lists
+const sidebarHeadings = document.querySelectorAll('.sidebar h2, .sidebar h3, .sidebar h4');
+sidebarHeadings.forEach(heading => {
+  heading.addEventListener('click', () => {
+    const subList = heading.nextElementSibling;
+    if (subList.style.display === 'none') {
+      subList.style.display = 'block';
+    } else {
+      subList.style.display = 'none';
+    }
+  });
+});
+</script>
 </body>
 </html>

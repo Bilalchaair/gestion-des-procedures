@@ -11,11 +11,11 @@ class Division extends Model
     protected $fillable = ['nom_division', 'hopital_id'];
     public function services()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Service::class, 'division_id');
     }
 
     public function hospital()
     {
-        return $this->belongsTo(Hospital::class);
+        return $this->belongsTo(Hopital::class, 'hopital_id');
     }
 }

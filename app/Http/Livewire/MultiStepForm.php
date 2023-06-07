@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Procedure;
+use App\Models\Service;
+use Illuminate\Support\Facades\DB;
 
 class MultiStepForm extends Component
 {
@@ -14,6 +16,9 @@ class MultiStepForm extends Component
     public $date_creation;
     public $nom_redacteur;
     public $fonction_redacteur;
+    public $service_id;
+    public $enregistrement_code;
+    public $service;
     public $nom_ver;
     public $fonction_ver;
     public $date_verification;
@@ -39,7 +44,9 @@ class MultiStepForm extends Component
     public function render()
     {
     
+        $this->service = DB::table('services')->get();
         return view('livewire.multi-step-form');    
+        
     }
 
 
@@ -67,7 +74,8 @@ class MultiStepForm extends Component
         if($this->currentStep == 1){
             $this->validate([
                 'nom_redacteur'=>'required|string',
-                'fonction_redacteur'=>'required|string'
+                'fonction_redacteur'=>'required|string',
+                'service_id'=> 'required'
             ]);
         }
 
@@ -119,7 +127,8 @@ class MultiStepForm extends Component
         $this->resetErrorBag();
         if($this->currentStep == 8){
           $this->validate([
-              'enregistrement'=>'required|string'
+              'enregistrement'=>'required|string',
+              'enregistrement_code'=>'required|string'
            ]);
         }
            $logi_name = $this->logigramme->getClientOriginalName();
@@ -129,6 +138,7 @@ class MultiStepForm extends Component
             $values = array(
                 "nom_redacteur"=>$this->nom_redacteur,
                 "fonction_redacteur"=>$this->fonction_redacteur,
+                "service_id"=>$this->service_id,
                 "reference_code"=>$this->reference_code,
                 "date_creation"=>$this->date_creation,
                 "reference_code"=>$this->reference_code,
@@ -139,11 +149,13 @@ class MultiStepForm extends Component
                 "abreviation"=>$this->abreviation,
                 "description"=>$this->description,
                 "logigramme"=>$logi_name,
-                "enregistrement"=>$this->enregistrement
+                "enregistrement"=>$this->enregistrement,
+                "enregistrement_code"=>$this->enregistrement_code
             );
 
             procedure::insert($values);
             return redirect()->route('showprocedure')->with('success','votre procedure a bien ete creee');
+            
       }    
   }
 

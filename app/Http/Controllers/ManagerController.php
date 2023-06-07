@@ -21,7 +21,7 @@ class ManagerController extends Controller
     public function upload(Request $request)
     {
         $procedure= new Procedurefile;
-        $procedure->nom_procedure = $request->name;
+        $procedure->nom_procedure = $request->nom_procedure;
         $file=$request->file;
         $filename=time().'.'.$file->getClientOriginalExtension();
         $request->file->move('procedure',$filename);

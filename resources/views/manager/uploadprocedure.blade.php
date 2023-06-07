@@ -104,7 +104,7 @@
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-												<img alt="Pic" src="adminassets/dist/assets/media/avatars/150-26.jpg" />
+												<img alt="Pic" src="assets/user.png" />
 											</div>
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -177,30 +177,7 @@
 							<!--begin::Title-->
 							<!--begin::Actions-->
 							<div class="d-flex align-items-center flex-wrap py-2">
-								<!--begin::Search bar-->
-								<div id="kt_header_search" class="d-flex align-items-center w-200px w-lg-250px my-2 me-4 me-lg-6" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-menu-trigger="auto" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-end">
-									<!--begin::Form-->
-									<form data-kt-search-element="form" class="search w-100 position-relative" autocomplete="off">
-										<!--begin::Hidden input(Added to disable form autocomplete)-->
-										<input type="hidden" />
-										<!--end::Hidden input-->
-										<!--begin::Icon-->
-										<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-										
-										<!--end::Svg Icon-->
-										<!--end::Icon-->
-										<!--begin::Input-->
-										<input type="text" class="form-control ps-15" name="search" value="" placeholder="Search..." data-kt-search-element="input" />
-										<!--end::Input-->
-										
-										<!--begin::Reset-->
-										
-										<!--end::Reset-->
-									</form>
-									<!--end::Form-->
-									
-								</div>
-								<!--end::Search-->
+								
                             
 								
 								
@@ -222,7 +199,7 @@
                                          @csrf
                                     <div class="labels">
                                         <label>nom du procedure :</label>
-                                        <input type="text" name="name">
+                                        <input type="text" name="nom_procedure">
                                     </div>
                                     <div class="labels">
                                         <label>file :</label>

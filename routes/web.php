@@ -92,6 +92,7 @@ route::get('modifierprocedure/{id}',[InterneController::class,'modifierprocedure
 route::post('modifier_proc/{id}',[InterneController::class,'modifier_proc'])->middleware('auth')->name('modifier_proc');
 route::get('exporterprocedure/{id}',[InterneController::class,'exporterprocedure'])->middleware('auth')->name('exporterprocedure');
 
+//route::get('page_procedure',[externeController::class,'page_procedure'])->middleware('auth')->name('page_procedure');
 route::get('page_procedure',[externeController::class,'page_procedure'])->middleware('auth')->name('page_procedure');
 //route::get('download{file}',[externeController::class,'download'])->middleware('auth')->name('download');
 Route::get('/download/{file}', [externeController::class, 'download'])->middleware('auth')->name('file.download');

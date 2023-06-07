@@ -33,6 +33,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('logigramme');
             $table->string('enregistrement')->nullable();
+            $table->string('enregistrement_code')->nullable();
+
             $table->timestamps();
         });
     }

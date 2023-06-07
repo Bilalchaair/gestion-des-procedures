@@ -108,7 +108,7 @@ class AdminController extends Controller
    {
     $division=new division;
     $division->nom_division=$request->nom_division;
-    $division->hospital_id=$request->hospital_id;
+    $division->hopital_id=$request->hopital_id;
     $division->save();
     return redirect('division');
    }
@@ -128,7 +128,7 @@ class AdminController extends Controller
    {
     $division=Division::find($id);
     $division->nom_division=$request->nom_division;
-    $division->hospital_id=$request->hospital_id;
+    $division->hopital_id=$request->hopital_id;
     $division->save();
     return redirect('division');
    }
@@ -149,7 +149,7 @@ class AdminController extends Controller
     $service=new Service;
     $service->nom_service=$request->nom_service;
     $service->division_id=$request->division_id;
-    $service->hospital_id=$request->hospital_id;
+    $service->hopital_id=$request->hopital_id;
     $service->save();
     return redirect('service');
    }
@@ -171,7 +171,7 @@ class AdminController extends Controller
     $service=service::find($id);
     $service->nom_service=$request->nom_service;
     $service->division_id=$request->division_id;
-    $service->hospital_id=$request->hospital_id;
+    $service->hopital_id=$request->hopital_id;
     $service->save();
     return redirect('service');
    }

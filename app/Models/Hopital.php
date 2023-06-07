@@ -16,10 +16,10 @@ class Hopital extends Model
 
     public function divisions()
     {
-        return $this->hasMany(Division::class);
+        return $this->hasMany(Division::class, 'hopital_id');
     }
     public function services()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Service::class, 'hopital_id');
     }
 }

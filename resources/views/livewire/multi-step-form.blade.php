@@ -24,6 +24,17 @@
 
                 <span class="text-danger">@error('fonction_redacteur'){{ $message }}@enderror</span>
             </div>
+            <br>
+            <div class="form-group">
+                <label><strong>Service:</strong></label>
+                <select wire:model="service_id" >
+                    @foreach($service as $data)
+                        <option value="{{$data->id}}" >{{$data->nom_service}}</option>
+                        @endforeach
+                    </select>
+
+                <span class="text-danger">@error('service_id'){{ $message }}@enderror</span>
+            </div>
         </div>
     </div>
 </div>
@@ -190,6 +201,11 @@
  
         <span class="text-danger">@error('enregistrement'){{ $message }}@enderror</span>
        </div>
+       <div class="form-group">
+                <label for=""><strong>Codes des enregistrement</strong></label>
+                <textarea class="form-control" cols="2" rows="8" wire:model="enregistrement_code"></textarea>
+                <span class="text-danger">@error('enregistrement_code'){{ $message }}@enderror</span>
+            </div>
     </div>
 </div>
 @endif

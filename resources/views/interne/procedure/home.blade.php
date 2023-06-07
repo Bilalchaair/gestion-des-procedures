@@ -40,8 +40,8 @@
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
 								<a href="#">
-									<img alt="Logo" src="adminassets/dist/assets/media/logos/logo-light.svg" class="h-15px h-lg-20px logo-default" />
-									<img alt="Logo" src="adminassets/dist/assets/media/logos/logo-default.svg" class="h-15px h-lg-20px logo-sticky" />
+									<img alt="Logo" src="assets/chulogo.png" class="h-15px h-lg-50px logo-default" />
+									<img alt="Logo" src="assets/chulogo.png" class="h-15px h-lg-50px logo-sticky" />
 								</a>
 							</div>
 							<!--end::Header Logo-->
@@ -139,7 +139,7 @@
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-												<img alt="Pic" src="adminassets/dist/assets/media/avatars/150-26.jpg" />
+												<img alt="Pic" src="assets/user.png" />
 											</div>
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -212,48 +212,7 @@
 							<!--begin::Title-->
 							<!--begin::Actions-->
 							<div class="d-flex align-items-center flex-wrap py-2">
-								<!--begin::Search bar-->
-								<div id="kt_header_search" class="d-flex align-items-center w-200px w-lg-250px my-2 me-4 me-lg-6" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-menu-trigger="auto" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-end">
-									<!--begin::Form-->
-									<form data-kt-search-element="form" class="search w-100 position-relative" autocomplete="off">
-										<!--begin::Hidden input(Added to disable form autocomplete)-->
-										<input type="hidden" />
-										<!--end::Hidden input-->
-										<!--begin::Icon-->
-										<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-										<span class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-white position-absolute top-50 translate-middle-y ms-5">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-												<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
-												<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
-											</svg>
-										</span>
-										<!--end::Svg Icon-->
-										<!--end::Icon-->
-										<!--begin::Input-->
-										<input type="text" class="form-control ps-15" name="search" value="" placeholder="Search..." data-kt-search-element="input" />
-										<!--end::Input-->
-										<!--begin::Spinner-->
-										<span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
-											<span class="spinner-border h-15px w-15px align-middle text-white"></span>
-										</span>
-										<!--end::Spinner-->
-										<!--begin::Reset-->
-										<span class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-4" data-kt-search-element="clear">
-											<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-											<span class="svg-icon svg-icon-2 svg-icon-white svg-icon-lg-1 me-0">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-													<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-												</svg>
-											</span>
-											<!--end::Svg Icon-->
-										</span>
-										<!--end::Reset-->
-									</form>
-									<!--end::Form-->
-									
-								</div>
-								<!--end::Search-->
+								
                                 <div >
 									<span  >
 									<a href="{{ route('addprocedure') }}" >
@@ -312,7 +271,7 @@
 											<div class="btn-group" role="group" aria-label="Basic example">
 												<a href="" type="button" class="btn btn-secondary">Detail</a>
 												<a href="{{url('modifierprocedure',$rs->id)}}" type="button" class="btn btn-warning">Edit</a>
-												<a href="{{url('delete_proc',$rs->id)}}" type="button" class="btn btn-danger">Delete</a>
+												<a href="{{url('delete_proc',$rs->id)}}" type="button" onclick="event.preventDefault(); showConfirmationModal({{$rs->id}});" class="btn btn-danger">Delete</a>
 												<a href="{{url('verifierprocedure',$rs->id)}}" type="button" class="btn btn-info">Vérifier</a>
 												<a href="{{url('approuverprocedure',$rs->id)}}" type="button" class="btn btn-success">Approuver</a>
 												@if (!is_null($rs->nom_ver)  && !is_null($rs->nom_app))
@@ -337,6 +296,7 @@
 							@endif
 							</tbody>
 						</table>
+						{{ $procedure->links() }}
 					</div>
 				
 					<!--end::Container-->
@@ -355,6 +315,75 @@
 			</div>
 			<!--end::Page-->
 		</div>
+		<div id="confirmationModal" class="modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <h3>Confirmation</h3>
+                <p>Etes-vous sûr(e) de vouloir supprimer cette procédure?</p>
+                <div class="modal-buttons">
+                    <button onclick="confirmDelete()" class="btn btn-danger">Delete</button>
+                    <button onclick="closeConfirmationModal()" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <style>
+              .modal {
+        position: fixed;
+        top: 0;
+        left: 25%;
+        width: 50%;
+        height: 100%;
+        display: none;
+        z-index: 9999;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 9999;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+        text-align: right;
+    }
+        </style>
+
+        <script>
+        var deleteId;
+
+function showConfirmationModal(id) {
+    deleteId = id;
+    var modal = document.getElementById('confirmationModal');
+    modal.style.display = 'block';
+}
+
+function closeConfirmationModal() {
+    var modal = document.getElementById('confirmationModal');
+    modal.style.display = 'none';
+}
+
+function confirmDelete() {
+    var modal = document.getElementById('confirmationModal');
+    modal.style.display = 'none';
+    window.location.href = "{{ url('delete_proc') }}/" + deleteId;
+}
+</script>
 	
 
 		<script
