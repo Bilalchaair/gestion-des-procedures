@@ -19,31 +19,25 @@ use App\Http\Controllers\externeController;
 */
 
 Route::get('/', function () {
-    if(Auth::id())
-    {
-    $usertype=Auth()->user()->usertype;
-    if($usertype== 'user')
-    {
-    return view('welcome');
-    }
-    else if($usertype=='admin')
-    {
-    return view('admin.adminhome');
-    }
-    else if($usertype=='manager')
-    {
-    return view('manager.managerhome');
-    }
-    else if($usertype=='user1')
-    {
-    return view('interne.utilisateurinternehome');
-    }
-    else
-    {
-        return redirect()->back();
-    }
+    if (Auth::check()) {
+        $usertype = Auth()->user()->usertype;
+        
+        if ($usertype == 'user') {
+            return view('welcome');
+        } else if ($usertype == 'admin') {
+            return view('admin.adminhome');
+        } else if ($usertype == 'manager') {
+            return view('manager.managerhome');
+        } else if ($usertype == 'user1') {
+            return view('interne.utilisateurinternehome');
+        } else {
+            return redirect()->back();
+        }
+    } else {
+        return view('welcome');
     }
 });
+
 
 /*Route::get('/dashboard', function () {
     return view('dashboard');
