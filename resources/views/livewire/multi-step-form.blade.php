@@ -28,6 +28,7 @@
             <div class="form-group">
                 <label><strong>Service:</strong></label>
                 <select wire:model="service_id" >
+                    <option value="" >Choisissez votre service</option>
                     @foreach($service as $data)
                         <option value="{{$data->id}}" >{{$data->nom_service}}</option>
                         @endforeach

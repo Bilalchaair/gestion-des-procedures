@@ -108,6 +108,8 @@ route::post('ajouter_app/{id}',[InterneController::class,'ajouter_app'])->middle
 route::get('modifierprocedure/{id}',[InterneController::class,'modifierprocedure'])->middleware('auth')->name('modifierprocedure');
 route::post('modifier_proc/{id}',[InterneController::class,'modifier_proc'])->middleware('auth')->name('modifier_proc');
 route::get('exporterprocedure/{id}',[InterneController::class,'exporterprocedure'])->middleware('auth')->name('exporterprocedure');
+route::get('/filter-procedure',[InterneController::class,'filterProcedure'])->middleware('auth')->name('filter-procedure');
+route::get('viewprocedure/{id}',[InterneController::class,'viewprocedure'])->middleware('auth')->name('viewprocedure');
 
 //route::get('page_procedure',[externeController::class,'page_procedure'])->middleware('auth')->name('page_procedure');
 route::get('page_procedure',[externeController::class,'page_procedure'])->middleware('auth')->name('page_procedure');

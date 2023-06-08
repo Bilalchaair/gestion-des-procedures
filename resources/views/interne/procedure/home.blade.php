@@ -246,6 +246,34 @@
 								{{ Session::get('error') }}
 							</div>
 						@endif
+						<form action="{{ url('filter-procedure') }}" method="GET">
+                            <div class="form-group">
+                                <label for="service">Trier par service:</label>
+                                <select name="service" id="service" class="form-control">
+                                    <option value="">All</option>
+                                    @foreach($service as $service)
+                                        <option value="{{ $service->id }}">{{ $service->nom_service }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="order">Trier par date de création :</label>
+                                <select name="order" id="order" class="form-control">
+                                    <option value="">Default</option>
+                                    <option value="oldest">Oldest</option>
+                                    <option value="newest">Newest</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Trier par Titre :</label>
+                                <select name="name" id="name" class="form-control">
+                                    <option value="">All</option>
+                                    <option value="asc">A-Z</option>
+                                    <option value="desc">Z-A</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Trier</button>
+                        </form>
 						<table class="table table-hover">
 							<thead class="table-primary">
 								<tr>
@@ -269,7 +297,7 @@
 										<td class="align-middle">{{ $rs->nom_redacteur }}</td>
 										<td class="align-middle">
 											<div class="btn-group" role="group" aria-label="Basic example">
-												<a href="" type="button" class="btn btn-secondary">Detail</a>
+												<a href="{{url('viewprocedure',$rs->id)}}" type="button" class="btn btn-secondary">Detail</a>
 												<a href="{{url('modifierprocedure',$rs->id)}}" type="button" class="btn btn-warning">Edit</a>
 												<a href="{{url('delete_proc',$rs->id)}}" type="button" onclick="event.preventDefault(); showConfirmationModal({{$rs->id}});" class="btn btn-danger">Delete</a>
 												<a href="{{url('verifierprocedure',$rs->id)}}" type="button" class="btn btn-info">Vérifier</a>
@@ -327,6 +355,16 @@
             </div>
         </div>
         <style>
+			.form-group {
+  display: inline-block;
+  margin-right: 10px;
+  width: 200px;
+}
+
+button[type="submit"] {
+  display: inline-block;
+ 
+}
               .modal {
         position: fixed;
         top: 0;

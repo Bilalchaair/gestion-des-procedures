@@ -1,38 +1,293 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en">
 <head>
-<title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* just a reset of the css */
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <br/>
-<style type="text/css">
-<!--
-	p {margin: 0; padding: 0;}	.ft10{font-size:11px;font-family:Times;color:#000000;}
-	.ft11{font-size:19px;font-family:Times;color:#000000;}
-	.ft12{font-size:11px;font-family:Times;color:#000000;}
-	.ft13{font-size:10px;font-family:Times;color:#000000;}
-	.ft14{font-size:14px;font-family:Times;color:#000000;}
-	.ft15{font-size:11px;line-height:19px;font-family:Times;color:#000000;}
-	.ft16{font-size:11px;line-height:17px;font-family:Times;color:#000000;}
-	.ft17{font-size:14px;line-height:20px;font-family:Times;color:#000000;}
--->
+.image{
+    justify-items: center;
+    align-items: center;
+    
+}
+img{
+    height: 80px;
+    width: 80px;
+}
+
+
+
+.parent-container {
+  display: block;
+  margin-left: 10%;
+}
+.titre { 
+    background-color: #dadada;
+    width: 95%;
+}
+
+.tableau1 {
+    margin-left: 5%;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+.tableau1 td, th {
+  border: 1px solid black;
+  padding: 8px;
+  margin-left: 5%;
+  border-collapse: collapse;
+  width: 18%;
+}
+
+.tableau{
+    margin-left: 5%;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+.tableau td, th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.tableau2  {
+    
+    border: 1px solid black;
+    margin-left: 23%;
+    width: 72%;
+    
+  }
+  .page-break {
+    page-break-after: always;
+	}
+  .logigramme{
+    width: 90%;
+    height: 75%;
+    margin-left: 5%;
+  }
+  .logigramme img{
+    width: 90%;
+    height: 75%;
+    margin-left: 5%;
+  }
+
 </style>
 </head>
-<body bgcolor="#A0A0A0" vlink="blue" link="blue">
-<div id="page1-div" style="position:relative;width:918px;height:1188px;">
-<img width="918" height="1188" src="assets/target001.png" alt="background image"/>
-<p style="position:absolute;top:147px;left:202px;white-space:nowrap" class="ft10">&#160;</p>
-<p style="position:absolute;top:65px;left:359px;white-space:nowrap" class="ft11"><b>PROCEDURE</b></p>
-<p style="position:absolute;top:70px;left:492px;white-space:nowrap" class="ft12"><b>&#160;</b></p>
-<p style="position:absolute;top:57px;left:612px;white-space:nowrap" class="ft15"><b>Référence&#160;:</b>&#160;<b>rtest</b>&#160;<br/><b>Edition&#160;:&#160;</b></p>
-<p style="position:absolute;top:78px;left:666px;white-space:nowrap" class="ft13"><b>01</b></p>
-<p style="position:absolute;top:77px;left:678px;white-space:nowrap" class="ft12"><b>&#160;</b></p>
-<p style="position:absolute;top:107px;left:250px;white-space:nowrap" class="ft11"><b>titre</b></p>
-<p style="position:absolute;top:113px;left:288px;white-space:nowrap" class="ft12"><b>&#160;</b></p>
-<p style="position:absolute;top:93px;left:612px;white-space:nowrap" class="ft16"><b>Date&#160;:&#160;datetest</b>&#160;<br/><b>Page&#160;:</b>&#160;1<b>/</b></p>
-<p style="position:absolute;top:109px;left:661px;white-space:nowrap" class="ft14">4</p>
-<p style="position:absolute;top:111px;left:670px;white-space:nowrap" class="ft10">&#160;</p>
-<p style="position:absolute;top:164px;left:106px;white-space:nowrap" class="ft17">&#160;<br/>&#160;</p>
-</div>
+<body>
+    <table class="tableau">
+        <tr>
+            <td  rowspan="2">
+                
+                <div class="image">
+                <img  src="assets/chu-new.png"  />
+                </div>
+                
+            </td>
+          <td>Procedure</td>
+          <td>Référence : {{$procedure->reference_code}} <br> Edition :</td>
+        </tr>
+        <tr>
+          <td>{{$procedure->nom_proc}}</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+        </tr>
+      </table>
+    
+    <br>
+    <div >
+      <div class="titre" >SUIVI DES MODIFICATIONS</div>
+	  <br>
+      <table class="tableau1">
+        <tr>
+          <th>Edition</th>
+          <th>Date</th>
+          <th>Nature de modification</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>{{$procedure->date_creation}}</td>
+          <td>création </td>
+        </tr>
+        
+      </table>
+      <br>
+      <div class="parent">
+        <div class="titre" >LISTE DE DIFFUSION</div>
+      </div>
+      <br>
+      <p>
+        DIFFUSION
+      </p>
+      <br>
+      <div class="parent">
+        <div class="titre" >MATRICE DE RESPONSABILITE</div>
+      </div>
+      <br>
+      
+      
+
+      <table class="tableau" >
+        <tr>
+          <td>#</td>
+          <td>Nom</td>
+          <td>fonction</td>
+          <td>Date</td>
+          <td>Signature</td>
+        </tr>
+        <tr>
+          <td>Rédigé par :</td>
+          <td>{{$procedure->nom_redacteur}}</td>
+          <td>{{$procedure->fonction_redacteur}}</td>
+          <td>{{$procedure->date_creation}}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Vérifié et Revue par :</td>
+          <td>{{$procedure->nom_ver}}</td>
+          <td>{{$procedure->fonction_ver}}</td>
+          <td>{{$procedure->date_verification}}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Approuvé par :</td>
+          <td>{{$procedure->nom_app}}</td>
+          <td>{{$procedure->fonction_app}}</td>
+          <td>{{$procedure->date_approvation}}</td>
+          <td></td>
+        </tr>
+      </table>
+      							<div class="page-break"></div>
+	  <table class="tableau">
+        <tr>
+            <td  rowspan="2">
+                
+                <div class="image">
+                <img  src="assets/chu-new.png"  />
+                </div>
+                
+            </td>
+          <td>Procedure</td>
+          <td>Référence : {{$procedure->reference_code}} <br> Edition :</td>
+        </tr>
+        <tr>
+          <td>{{$procedure->nom_proc}}</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+        </tr>
+      </table>
+	  <br>
+	  <div class="titre" > I.	 OBJET</div>
+	  <br>
+	  <p>
+	  {{$procedure->objet}}
+	  </p>
+	  <br>
+	  <div class="titre" > II.	DOMAINE D’APPLICATION</div>
+	  <br> 
+	  <p>
+	  {{$procedure->domaineapp}}
+	  </p>
+	  <br>
+	  <div class="titre" > III.	REFERENCES</div>
+	  <br>
+	  <p>
+	  {{$procedure->references}}
+	  </p>
+	  <br>
+	  <div class="titre" > IV.	ABREVEATIONS ET DEFINITIONS </div>
+	  <br>
+	  <p>
+	  {{$procedure->abreviation}}
+	  </p>
+	  <br>
+	  
+	  						<div class="page-break"></div>
+	  <table class="tableau">
+        <tr>
+            <td  rowspan="2">
+                
+                <div class="image">
+                <img  src="assets/chu-new.png"  />
+                </div>
+                
+            </td>
+          <td>Procedure</td>
+          <td>Référence : {{$procedure->reference_code}} <br> Edition :</td>
+        </tr>
+        <tr>
+          <td>{{$procedure->nom_proc}}</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+        </tr>
+      </table>
+	  <br>
+	  <div class="titre" > V.	DESCRIPTION DE LA PROCEDURE </div>
+	  <br>
+	  <p>
+	  {{$procedure->description}}
+	  </p>
+	  							<div class="page-break"></div>
+		<table class="tableau">
+        <tr>
+            <td  rowspan="2">
+                
+                <div class="image">
+                <img  src="assets/chu-new.png"  />
+                </div>
+                
+            </td>
+          <td>Procedure</td>
+          <td>Référence : {{$procedure->reference_code}} <br> Edition :</td>
+        </tr>
+        <tr>
+          <td>{{$procedure->nom_proc}}</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+        </tr>
+      </table>
+	  <br> 
+	  <div class="logigramme">
+    <img src="<?php echo $pic ?> " width="500px"height="700px" >
+	  </div>
+	  								<div class="page-break"></div>
+									  <table class="tableau">
+        <tr>
+            <td  rowspan="2">
+                
+                <div class="image">
+                <img  src="assets/chu-new.png"  />
+                </div>
+                
+            </td>
+          <td>Procedure</td>
+          <td>Référence : {{$procedure->reference_code}} <br> Edition :</td>
+        </tr>
+        <tr>
+          <td>{{$procedure->nom_proc}}</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+        </tr>
+      </table>
+	  <br>
+	  <div class="titre" > IV.	Liste des enregistrements attachés  </div>
+	  <br>
+	  <table class="tableau" >
+        <tr>
+          <td>Enregistrement</td>
+          <td>Code</td>
+        </tr>
+        <tr>
+          <td>{{$procedure->enregistrement}}</td>
+          <td>{{$procedure->enregistrement_code}}</td>
+        </tr>
+      </table>
+
+
+
+      
+      
+      
+
+
+    
 </body>
 </html>

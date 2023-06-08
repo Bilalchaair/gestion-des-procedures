@@ -237,7 +237,8 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="form-group">
                                         <label><strong>Service:</strong></label>
                                         <select name="service_id" >
-                                            @foreach($service as $data)
+											<option value="{{$procedure->service_id}}">{{ $service->where('id', $procedure->service_id)->pluck('nom_service')->first() }}</option>
+                                            @foreach($service->except($procedure->service_id) as $data)
                                                 <option value="{{$data->id}}" >{{$data->nom_service}}</option>
                                                 @endforeach
                                             </select>

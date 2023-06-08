@@ -26,11 +26,11 @@ return new class extends Migration
             $table->string('nom_app')->nullable();
             $table->string('fonction_app')->nullable();
             $table->string('date_approvation')->nullable();
-            $table->string('objet')->nullable();
-            $table->string('domaineapp')->nullable();
-            $table->string('references')->nullable();
-            $table->string('abreviation')->nullable();
-            $table->string('description')->nullable();
+            $table->text('objet')->nullable();
+            $table->text('domaineapp')->nullable();
+            $table->text('references')->nullable();
+            $table->text('abreviation')->nullable();
+            $table->text('description')->nullable();
             $table->string('logigramme');
             $table->string('enregistrement')->nullable();
             $table->string('enregistrement_code')->nullable();

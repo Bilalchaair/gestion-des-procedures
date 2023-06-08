@@ -192,7 +192,7 @@
                             <td>{{ $procedurefile->nom_procedure }}</td>
                             <td>
                                 <a href="{{ $procedurefile->file }}" download>Download PDF</a>
-                            </td>
+                            </td>	
                         </tr>
                     @endforeach
                 @endforeach

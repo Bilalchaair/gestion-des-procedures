@@ -17,8 +17,9 @@ class InterneController extends Controller
     if (Auth::check()) {
         $usertype = Auth()->user()->usertype;
         if ($usertype == 'user1') {
-        $procedure = Procedure::paginate(1);
-        return view('interne.procedure.home',compact('procedure'));}
+        $procedure = Procedure::paginate(5);
+        $service = Service::all();
+        return view('interne.procedure.home',compact('procedure','service'));}
     } else {
         return view('welcome');
     }
@@ -51,10 +52,7 @@ class InterneController extends Controller
         $usertype = Auth()->user()->usertype;
         if ($usertype == 'user1') {
         $data=procedure::find($id);
-        $request->validate([
-            'nom_ver' => ['required','regex:/^[a-zA-Z]+$/u' , 'string', 'max:255'],
-    
-        ]);
+        
         $data->nom_ver=$request->nom_ver;
         $data->fonction_ver=$request->fonction_ver;
         $data->date_verification=$request->date_verification;
@@ -99,10 +97,7 @@ class InterneController extends Controller
         $usertype = Auth()->user()->usertype;
         if ($usertype == 'user1') {
         $data=procedure::find($id);
-        $request->validate([
-            'nom_app' => ['required','regex:/^[a-zA-Z]+$/u' , 'string', 'max:255'],
-    
-        ]);
+        
         $data->nom_app=$request->nom_app;
         $data->fonction_app=$request->fonction_app;
         $data->date_approvation=$request->date_approvation;
@@ -180,11 +175,56 @@ class InterneController extends Controller
         $usertype = Auth()->user()->usertype;
         if ($usertype == 'user1') {
     $procedure=Procedure::find($id);
-    $pdf = PDF::loadView('interne.pdf.procedure', ['procedure' => $procedure]);
+    $path = storage_path('app/logigrammes/' . $procedure->logigramme); // Replace 'image.jpg' with the actual filename
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $pic = 'data:image/'. $type. ';base64,'. base64_encode($data);
+    $pdf = PDF::loadView('interne.pdf.procedure', ['procedure' => $procedure,'pic'=>$pic]);
     return $pdf->download('procedure.pdf');}
     } else {
         return view('welcome');
     }
    }
+   public function filterProcedure(Request $request)
+{
+    $serviceId = $request->input('service','');
+    $order = $request->input('order','');
+    $name = $request->input('name','');
+
+    $query = Procedure::query();
+
+    // Apply service filter if selected
+    if ($serviceId) {
+        $query->where('service_id', $serviceId);
+    }
+
+    // Apply sorting order if selected
+    if ($order === 'oldest') {
+        $query->orderBy('date_creation', 'asc');
+    } elseif ($order === 'newest') {
+        $query->orderBy('date_creation', 'desc');
+    }
+
+    // Apply sorting by name if selected
+    if ($name === 'asc') {
+        $query->orderBy('nom_proc', 'asc');
+    } elseif ($name === 'desc') {
+        $query->orderBy('nom_proc', 'desc');
+    }
+
+    $procedure = $query->paginate(5);
+
+    $service = Service::all();
+
+    return view('interne.procedure.home', compact('procedure', 'service'));
+}
+public function viewprocedure($id){
+    $procedure = Procedure::find($id);
+    $path = storage_path('app/logigrammes/' . $procedure->logigramme); // Replace 'image.jpg' with the actual filename
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $pic = 'data:image/'. $type. ';base64,'. base64_encode($data);
+    return view('interne.procedure.viewprocedure',compact('procedure','pic'));
+}
    
 }
