@@ -9,39 +9,48 @@
 	<link href="adminassets/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="exxterne/style1.css">
 	<link rel="stylesheet" href="adminassets/style.css">
+	
 	<style>
-		.sidebar {
-  width: 200px;
-  background-color: #f1f1f1;
-  padding: 10px;
+	.data-container {
+
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+	}
+
+.data-item {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: #f1f1f1;
 }
 
-.sidebar ul {
-  list-style-type: none;
-  padding-left: 20px;
+.data-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
 }
 
-.sidebar ul ul {
-  display: none;
-  padding-left: 20px;
+.data-name {
+    margin-top: 10px;
+    font-weight: bold;
 }
 
-.sidebar li {
-  margin-bottom: 10px;
-}
-
-.sidebar li a {
-  text-decoration: none;
-  color: #333;
-}
-
-.table-container {
-  margin-left: 220px; /* Adjust the margin as needed */
+.btn-primary {
+    margin-top: 10px;
+    background-color: #337ab7;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 	</style>
 </head>
 <body>
+	
 <!-- partial:index.partial.html -->
 <header class="header-area overlay">
     <nav class="navbar navbar-expand-md navbar-dark">
@@ -49,6 +58,7 @@
 
 		
 		<div class="container">
+			
 			<img style="width: 50px;" class="navbar-brand" src="assets/chu-new.png" alt="">
 			
 			
@@ -140,68 +150,130 @@
 						</div>
 						@endif
 					</div></li>
+				
 				</ul>
 			</div>
 		</div>
 	</nav>
 </header>
+<style>#hospital-select,
+	#division-select,
+	#service-select {
+	  display: inline-block;
+	  margin-right: 10px;
+	  width:25%
+	}
+	#procedure-files{
+		display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+	}</style>
+
 
 <main>
-<div class="sidebar">
-    <ul>
-        @foreach ($hopitals as $hopital)
-            <li>
-                <h2>{{ $hopital->nom_hopital }}</h2>
-                <ul>
-                    @foreach ($hopital->divisions as $division)
-                        <li>
-                            <h3>{{ $division->nom_division }}</h3>
-                            <ul>
-                                @foreach ($division->services as $service)
-                                    <li>
-                                        <h4>{{ $service->nom_service }}</h4>
-                                        <ul>
-                                            @foreach ($service->procedurefiles as $procedurefile)
-                                                <li>
-                                                    <a href="{{ $procedurefile->file }}">{{ $procedurefile->nom_procedure }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endforeach
-                </ul>
-            </li>
-        @endforeach
-    </ul>
-</div>
-
-<div class="table-container">
-    <table>
-        <tr>
-            <th>Nom Procedure</th>
-            <th>Download</th>
-        </tr>
-        @foreach ($hopitals as $hopital)
-            @foreach ($hopital->divisions as $division)
-                @foreach ($division->services as $service)
-                    @foreach ($service->procedurefiles as $procedurefile)
-                        <tr>
-                            <td>{{ $procedurefile->nom_procedure }}</td>
-                            <td>
-                                <a href="{{ $procedurefile->file }}" download>Download PDF</a>
-                            </td>	
-                        </tr>
-                    @endforeach
-                @endforeach
-            @endforeach
-        @endforeach
-    </table>
-</div>
-
+	<div class="data-container">
+		<select id="hospital-select">
+			<option value="">Tous les Hopitaux</option>
+			@foreach ($hopitals as $hopital)
+				<option value="{{ $hopital->id }}">{{ $hopital->nom_hopital }}</option>
+			@endforeach
+		</select>
+	
+		<select id="division-select">
+			<option value="">Toutes les Divisions</option>
+		</select>
+	
+		<select id="service-select">
+			<option value="">Tous les Services</option>
+		</select>
+	
+		<button id="filter-button" class="btn btn-primary">Trier</button>
+	
+		<div id="procedure-files">
+			<!-- Procedure files will be dynamically added here -->
+			<div class="data-container">
+				@foreach ($hopitals as $hopital)
+					@foreach ($hopital->divisions as $division)
+						@foreach ($division->services as $service)
+							@foreach ($service->procedurefiles as $procedurefile)
+								<div class="data-item">
+									<a href="#">
+										<img src="externe/pdfimg.png" alt="Image">
+									</a>
+									<div class="data-name">{{ $procedurefile->nom_procedure }}</div>
+									<a type="button" class="btn btn-info" href="{{ url('procedure/' . $procedurefile->file) }}" download>Télécharger PDF</a>
+									
+								</div>
+							@endforeach
+						@endforeach
+					@endforeach
+				@endforeach
+			</div>
+		</div>
+	</div>
 </main>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#filter-button').click(function () {
+            var selectedHospital = $('#hospital-select').val();
+            var selectedDivision = $('#division-select').val();
+            var selectedService = $('#service-select').val();
+
+            $.ajax({
+                url: '/procedurefiles',
+                type: 'GET',
+                data: {
+                    hospitalId: selectedHospital,
+                    divisionId: selectedDivision,
+                    serviceId: selectedService
+                },
+                success: function (response) {
+                    $('#procedure-files').html(response);
+                }
+            });
+        });
+
+        $('#hospital-select').change(function () {
+            var hospitalId = $(this).val();
+            if (hospitalId) {
+                $.ajax({
+                    url: '/divisions/' + hospitalId,
+                    type: 'GET',
+                    success: function (response) {
+                        $('#division-select').html(response);
+                    }
+                });
+            } else {
+                $('#division-select').html('<option value="">Toutes les Divisions</option>');
+                $('#service-select').html('<option value="">Tous les Services</option>');
+            }
+        });
+
+        $('#division-select').change(function () {
+            var divisionId = $(this).val();
+            if (divisionId) {
+                $.ajax({
+                    url: '/services/' + divisionId,
+                    type: 'GET',
+                    success: function (response) {
+                        $('#service-select').html(response);
+                    }
+                });
+            } else {
+                $('#service-select').html('<option value="">Tous les Services</option>');
+            }
+        });
+    });
+</script>
+ 
+ 
+ 
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script><script  src="externe/script.js"></script>
   <script>var hostUrl = "adminassets/dist/assets/";</script>
@@ -215,18 +287,6 @@
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="adminassets/dist/assets/js/custom/widgets.js"></script>
-		<script>// Add an event listener to the sidebar heading elements to toggle visibility of sub-lists
-const sidebarHeadings = document.querySelectorAll('.sidebar h2, .sidebar h3, .sidebar h4');
-sidebarHeadings.forEach(heading => {
-  heading.addEventListener('click', () => {
-    const subList = heading.nextElementSibling;
-    if (subList.style.display === 'none') {
-      subList.style.display = 'block';
-    } else {
-      subList.style.display = 'none';
-    }
-  });
-});
-</script>
+
 </body>
 </html>

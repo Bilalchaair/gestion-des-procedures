@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 
-class externeController extends Controller
+class ExterneController extends Controller
 {
     public function page_procedure()
     {
@@ -55,5 +55,79 @@ class externeController extends Controller
         }
 
 
+   }
+   public function getDivisions($hospitalId)
+   {
+    if($hospitalId =='all' ){
+        $divisions = Division::all();
+    
+        $options = '<option value="all">All Divisions</option>';
+        foreach ($divisions as $division) {
+            $options .= '<option value="' . $division->id . '">' . $division->nom_division . '</option>';
+        }
+        return $options;
+    }else{
+       $hopital = Hopital::findOrFail($hospitalId);
+       $divisions = $hopital->divisions;
+
+       $options = '<option value="">Select Division</option>';
+       foreach ($divisions as $division) {
+           $options .= '<option value="' . $division->id . '">' . $division->nom_division . '</option>';
+       }
+
+       return $options;
+    }
+   }
+
+   public function getServices($divisionId)
+   { if($divisionId =='all' ){
+    $services = Service::all();
+    $options = '<option value="">Select Service</option>';
+    $options = '<option value="all">All Services</option>';
+    foreach ($services as $service) {
+        $options .= '<option value="' . $service->id . '">' . $service->nom_service . '</option>';
+    }
+    return $options;
+}else{
+       $division = Division::findOrFail($divisionId);
+       $services = $division->services;
+
+       $options = '<option value="">Select Service</option>';
+       foreach ($services as $service) {
+           $options .= '<option value="' . $service->id . '">' . $service->nom_service . '</option>';
+       }
+
+       return $options;
+    }
+   }
+
+   public function getProcedureFiles(Request $request)
+   {
+       $hospitalId = $request->input('hospitalId');
+       $divisionId = $request->input('divisionId');
+       $serviceId = $request->input('serviceId');
+   
+       $procedurefiles = ProcedureFile::query();
+   
+
+
+    if ($serviceId) {
+        $procedurefiles->where('service_id', $serviceId);
+    }
+
+       $procedurefiles = $procedurefiles->get();
+   
+       $html = '';
+       foreach ($procedurefiles as $procedurefile) {
+           $html .= '<div class="data-item">
+           <a href="#">
+               <img src="externe/pdfimg.png" alt="Image">
+           </a>
+           <div class="data-name">' . $procedurefile->nom_procedure . '</div>
+           <a type="button" class="btn btn-info" href="' . url("procedure/{$procedurefile->file}") . '" download>Télécharger PDF</a>
+        </div>';
+       }
+   
+       return $html;
    }
 }

@@ -112,7 +112,10 @@ route::get('/filter-procedure',[InterneController::class,'filterProcedure'])->mi
 route::get('viewprocedure/{id}',[InterneController::class,'viewprocedure'])->middleware('auth')->name('viewprocedure');
 
 //route::get('page_procedure',[externeController::class,'page_procedure'])->middleware('auth')->name('page_procedure');
-route::get('page_procedure',[externeController::class,'page_procedure'])->middleware('auth')->name('page_procedure');
-//route::get('download{file}',[externeController::class,'download'])->middleware('auth')->name('download');
-Route::get('/download/{file}', [externeController::class, 'download'])->middleware('auth')->name('file.download');
-Route::get('/view/{id}', [externeController::class, 'view'])->middleware('auth')->name('view');
+route::get('page_procedure',[ExterneController::class,'page_procedure'])->middleware('auth')->name('page_procedure');
+//route::get('download{file}',[ExterneController::class,'download'])->middleware('auth')->name('download');
+Route::get('/download/{file}', [ExterneController::class, 'download'])->middleware('auth')->name('file.download');
+Route::get('/view/{id}', [ExterneController::class, 'view'])->middleware('auth')->name('view');
+Route::get('/procedurefiles', [ExterneController::class, 'getProcedureFiles']);
+Route::get('/divisions/{hospitalId}', [ExterneController::class, 'getDivisions']);
+Route::get('/services/{divisionId}', [ExterneController::class, 'getServices']);
