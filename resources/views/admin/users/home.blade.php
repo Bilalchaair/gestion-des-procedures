@@ -236,7 +236,7 @@ License: For each use you must have a valid license purchased only from above li
 								<th>Id</th>
 								<th>Name</th>
             					<th>Email</th>
-								<th>Password</th>
+								
 								<th>Usertype</th>
 								<th>Action</th>
        						 </tr>
@@ -248,7 +248,7 @@ License: For each use you must have a valid license purchased only from above li
 								<td>{{$user->id}}</td>
 								<td>{{$user->name}}</td>
 								<td>{{$user->email}}</td>
-								<td>{{$user->password}}</td>
+								
 								<td>{{$user->usertype}}</td>
 								<td>
 									<a href="{{url('delete_user',$user->id)}}" class="btn">delete</a>
