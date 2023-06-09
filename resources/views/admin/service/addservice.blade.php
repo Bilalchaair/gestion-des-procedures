@@ -102,6 +102,13 @@ License: For each use you must have a valid license purchased only from above li
 													</a>
 											</span>
 											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('division') }}" >
+														<span class="menu-title">Division</span>
+													</a>
+											</span>
+											</div>
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('service') }}" >
@@ -141,9 +148,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="separator my-2"></div>
 												<!--end::Menu separator-->
 												<!--begin::Menu item-->
-												<div class="menu-item px-5">
-													<a href="adminassets/dist/account/overview.html" class="menu-link px-5">My Profile</a>
-												</div>
+												
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">
@@ -216,40 +221,33 @@ License: For each use you must have a valid license purchased only from above li
 						
 					</div>
 					<!--end::Toolbar-->
-                <div class="forms">
-                    <form action="{{url('add_service')}}" method="POST" enctype="multipart/form-data" class="select">
-                        @csrf
-                                    <div class="labels">
-                                        <label>nom du service :</label>
-                                        <input type="text" name="nom_service">
-                                    </div>
-                                    <div class="labels">
-                                        <label> Division:</label>
-										
-                                        <select name="division_id"  >
-										@foreach($division as $item)
-                                            <option value="{{$item->id}}">{{$item->nom_division}}</option>
-										@endforeach	
-                                        </select>
-										
-                                    </div>
-                                    <div class="labels">
-                                        <label> Hôpital:</label>
-										
-                                        <select name="hopital_id"  >
-										@foreach($hopital as $data)
-                                            <option value="{{$data->id}}">{{$data->nom_hopital}}</option>
-										@endforeach	
-                                        </select>
-										
-                                    </div>
-                                    <div >
-                                    <input type="submit" value="Submit" class="submit">
-                                    </div>
-
-
-                    </form>
-				</div>
+					<div class="forms">
+                        <form action="{{url('add_service')}}" method="POST" enctype="multipart/form-data" class="select">
+                            @csrf
+                            <div class="labels">
+                                <label>nom du service:</label>
+                                <input type="text" name="nom_service">
+                            </div>
+                            <div class="labels">
+                                <label>Hôpital:</label>
+                                <select name="hopital_id" id="hopital-select">
+                                    
+                                    @foreach($hopital as $data)
+                                        <option value="{{$data->id}}">{{$data->nom_hopital}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="labels">
+                                <label>Division:</label>
+                                <select name="division_id" id="division-select">
+                                    <!-- Options will be dynamically added here -->
+                                </select>
+                            </div>
+                            <div>
+                                <input type="submit" value="Submit" class="submit">
+                            </div>
+                        </form>
+                    </div>
                     
 				</div>
 				<!--end::Wrapper-->
@@ -284,6 +282,38 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Page Vendors Javascript-->
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="adminassets/dist/assets/js/custom/widgets.js"></script>
+		<script>
+            // Retrieve the elements
+            var hopitalSelect = document.getElementById('hopital-select');
+            var divisionSelect = document.getElementById('division-select');
+
+            // Event listener for hopital select change
+            hopitalSelect.addEventListener('change', function() {
+                var selectedHopitalId = hopitalSelect.value;
+                updateDivisionOptions(selectedHopitalId);
+            });
+
+            // Function to update division options based on the selected hopital
+            function updateDivisionOptions(selectedHopitalId) {
+                // Clear existing options
+                divisionSelect.innerHTML = '';
+
+                // Add division options that match the selected hopital
+                @foreach($division as $division)
+
+                        if (selectedHopitalId === '{{$division->hopital_id}}') {
+                            var option = document.createElement('option');
+                            option.value = '{{$division->id}}';
+                            option.textContent = '{{$division->nom_division}}';
+                            divisionSelect.appendChild(option);
+                        }
+
+                @endforeach
+            }
+
+            // Trigger initial update of division options
+            updateDivisionOptions(hopitalSelect.value);
+        </script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

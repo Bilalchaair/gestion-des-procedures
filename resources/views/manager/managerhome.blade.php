@@ -67,13 +67,7 @@
 											</span>	
 												
 											</div>
-											<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-												<span class="menu-link py-3">
-													<span class="menu-title">Account</span>
-													<span class="menu-arrow d-lg-none"></span>
-												</span>
-												
-											</div>
+											
 											
 											
 											
@@ -112,9 +106,7 @@
 												<div class="separator my-2"></div>
 												<!--end::Menu separator-->
 												<!--begin::Menu item-->
-												<div class="menu-item px-5">
-													<a href="adminassets/dist/account/overview.html" class="menu-link px-5">My Profile</a>
-												</div>
+												
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">

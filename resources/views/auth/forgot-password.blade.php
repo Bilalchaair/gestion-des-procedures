@@ -1,4 +1,15 @@
 <x-guest-layout>
+<style>
+        .image{
+            width: 90px;
+            height: 90px;
+            margin-left: 35%;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+    </style>
+    <div> <img class="image" src="assets/chu-new.png" ></div>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>

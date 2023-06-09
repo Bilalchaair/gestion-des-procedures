@@ -1,4 +1,15 @@
 <x-guest-layout>
+<style>
+        .image{
+            width: 90px;
+            height: 90px;
+            margin-left: 35%;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+    </style>
+    <div> <img class="image" src="assets/chu-new.png" ></div>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
     </div>

@@ -104,6 +104,13 @@ License: For each use you must have a valid license purchased only from above li
 													</a>
 											</span>
 											</div>
+											<div  class="menu-item menu-lg-down-accordion me-lg-1">
+											<span class="menu-link py-3">
+													<a class="menu-title" href="{{ route('division') }}" >
+														<span class="menu-title">Division</span>
+													</a>
+											</span>
+											</div>
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('service') }}" >
@@ -143,9 +150,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="separator my-2"></div>
 												<!--end::Menu separator-->
 												<!--begin::Menu item-->
-												<div class="menu-item px-5">
-													<a href="adminassets/dist/account/overview.html" class="menu-link px-5">My Profile</a>
-												</div>
+												
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">

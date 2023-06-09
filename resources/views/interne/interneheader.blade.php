@@ -99,9 +99,7 @@
 												<div class="separator my-2"></div>
 												<!--end::Menu separator-->
 												<!--begin::Menu item-->
-												<div class="menu-item px-5">
-													<a href="adminassets/dist/account/overview.html" class="menu-link px-5">My Profile</a>
-												</div>
+												
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-5">

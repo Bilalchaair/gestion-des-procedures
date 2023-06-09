@@ -1,4 +1,15 @@
 <x-guest-layout>
+<style>
+        .image{
+            width: 90px;
+            height: 90px;
+            margin-left: 35%;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+        }
+    </style>
+    <div> <img class="image" src="assets/chu-new.png" ></div>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
