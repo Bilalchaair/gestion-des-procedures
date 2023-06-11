@@ -39,8 +39,8 @@
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
 								<a href="#">
-									<img alt="Logo" src="adminassets/dist/assets/media/logos/logo-light.svg" class="h-15px h-lg-20px logo-default" />
-									<img alt="Logo" src="adminassets/dist/assets/media/logos/logo-default.svg" class="h-15px h-lg-20px logo-sticky" />
+									<img alt="Logo" src="assets/chulogo.png" class="h-15px h-lg-50px logo-default" />
+									<img alt="Logo" src="assets/chulogo.png" class="h-15px h-lg-50px logo-sticky" />
 								</a>
 							</div>
 							<!--end::Header Logo-->
@@ -63,7 +63,7 @@
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{url('upload_procedure')}}" >
-														<span class="menu-title">Procedures</span>
+														<span class="menu-title">Procédures</span>
 													</a>
 											</span>	
 												
@@ -113,7 +113,7 @@
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -133,7 +133,7 @@
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -165,7 +165,7 @@
 						<!--begin::Container-->
 						<div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
 							<!--begin::Title-->
-							<h3 class="text-white fw-bolder fs-2qx me-5">upload procedure</h3>
+							<h3 class="text-white fw-bolder fs-2qx me-5">Publier procédure</h3>
 							<!--begin::Title-->
 							<!--begin::Actions-->
 							<div class="d-flex align-items-center flex-wrap py-2">
@@ -173,7 +173,7 @@
                                 <div >
 									<span>
 									<a href="{{ route('uploadprocedure') }}" >
-									<span class="buttoncss" >upload procedure </span>
+									<span class="buttoncss" >Publier procédure </span>
 									</a>
 								    </span>	
 								</div>
@@ -193,17 +193,52 @@
 					</div>
 					<!--end::Toolbar-->
                     <div class="forms">
+						@if(Session::has('success'))
+						<div class="alert alert-success" role="alert" id="alert">
+							
+							{{ Session::get('success') }}
+						</div>
+					@endif
+					@if(Session::has('error'))
+						<div class="alert alert-danger" role="alert" id="alert">
+							
+							{{ Session::get('error') }}
+						</div>
+					@endif
+					<form action="{{ url('filter-procedurefile') }}" method="GET">
+						<div class="form-group">
+							<label for="service">Trier par service:</label>
+							<select name="serviceId" id="service" class="form-control">
+								<option value="">Tous</option>
+								@foreach($service as $service)
+									<option value="{{ $service->id }}" @if($service->id == $serviceId) selected @endif>{{ $service->nom_service }}</option>
+								@endforeach
+							</select>
+						</div>
+					
+						
+						<div class="form-group">
+							<label for="name">Trier par Nom :</label>
+							<select name="name" id="name" class="form-control">
+								<option value="" @if(request()->name == '') selected @endif>Tous</option>
+								<option value="asc" @if(request()->name == 'asc') selected @endif>A-Z</option>
+								<option value="desc" @if(request()->name == 'desc') selected @endif>Z-A</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">Trier</button>
+					</form>
 					<table class="styled-table">
     					<thead>
         					<tr>
 								<th>Id</th>
-								<th>Nom procedure </th>
-            					<th>file</th>
+								<th>Nom procédure </th>
+            					<th>fichier</th>
                                 <th>service_id</th>
 								<th>Action</th>
        						 </tr>
     					</thead>
     				<tbody>
+						@if($procedure->count() > 0)
 						@foreach($procedure as $data)
         					
         					<tr class="active-row">
@@ -212,14 +247,20 @@
                                 <td>{{$data->file}}</td>
 								<td>{{$data->service_id}}</td>
 								<td>
-								<a href="{{url('delete_procedure',$data->id)}}" class="btn">delete</a>
-								<a href="{{url('update_procedure',$data->id)}}" class="btn">update</a>
+								<a href="{{url('delete_procedure',$data->id)}}" onclick="event.preventDefault(); showConfirmationModal({{$data->id}});"  class="btn">Supprimer</a>
+								<a href="{{url('update_procedure',$data->id)}}" class="btn">Modifier</a>
 								</td>
         					</tr>
 						@endforeach
+						@else
+						<tr>
+							<td class="text-center" colspan="5">Aucune procédure Trouvée</td>
+						</tr>
+					@endif
         				<!-- and so on... -->
     				</tbody>
 					</table>
+					{{ $procedure->appends(request()->query())->links() }}
 					</div>
                     
 					<!--begin::Container-->
@@ -233,6 +274,98 @@
 			</div>
 			<!--end::Page-->
 		</div>
+		<div id="confirmationModal" class="modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <h3>Confirmation</h3>
+                <p>Etes-vous sûr(e) de vouloir supprimer cette procédure?</p>
+                <div class="modal-buttons">
+                    <button onclick="confirmDelete()" class="btn btn-danger">Supprimer</button>
+                    <button onclick="closeConfirmationModal()" class="btn btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+        <style>
+			.form-group {
+  display: inline-block;
+  margin-right: 10px;
+  width: 200px;
+}
+
+button[type="submit"] {
+  display: inline-block;
+ 
+}
+              .modal {
+        position: fixed;
+        top: 0;
+        left: 25%;
+        width: 50%;
+        height: 100%;
+        display: none;
+        z-index: 9999;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 9999;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+        text-align: right;
+    }
+        </style>
+
+        <script>
+        var deleteId;
+
+function showConfirmationModal(id) {
+    deleteId = id;
+    var modal = document.getElementById('confirmationModal');
+    modal.style.display = 'block';
+}
+
+function closeConfirmationModal() {
+    var modal = document.getElementById('confirmationModal');
+    modal.style.display = 'none';
+}
+
+function confirmDelete() {
+    var modal = document.getElementById('confirmationModal');
+    modal.style.display = 'none';
+    window.location.href = "{{ url('delete_procedure') }}/" + deleteId;
+}
+</script>
+	
+
+		<script
+		src="https://code.jquery.com/jquery-3.7.0.js"
+		integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+		crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function(){
+				  setTimeout(function() {
+					  $('#alert').fadeOut('fast');
+				  }, 4000);
+			  });
+		  </script>
 		<!--end::Root-->
         <script>var hostUrl = "adminassets/dist/assets/";</script>
 		<!--begin::Javascript-->

@@ -47,7 +47,7 @@ class ExterneController extends Controller
         $usertype = Auth()->user()->usertype;
         
         if ($usertype == 'user') {
-            $procedurefiles10=Procedurefiles::find($id);
+            $procedurefiles10=Procedurefile::find($id);
 
             return view('viewprocedure',compact('procedurefiles10'));}
         } else {
@@ -70,7 +70,7 @@ class ExterneController extends Controller
        $hopital = Hopital::findOrFail($hospitalId);
        $divisions = $hopital->divisions;
 
-       $options = '<option value="">Select Division</option>';
+       $options = '<option value="">Choissisez Division</option>';
        foreach ($divisions as $division) {
            $options .= '<option value="' . $division->id . '">' . $division->nom_division . '</option>';
        }
@@ -82,7 +82,7 @@ class ExterneController extends Controller
    public function getServices($divisionId)
    { if($divisionId =='all' ){
     $services = Service::all();
-    $options = '<option value="">Select Service</option>';
+    $options = '<option value="">Choisissez Service</option>';
     $options = '<option value="all">All Services</option>';
     foreach ($services as $service) {
         $options .= '<option value="' . $service->id . '">' . $service->nom_service . '</option>';
@@ -92,7 +92,7 @@ class ExterneController extends Controller
        $division = Division::findOrFail($divisionId);
        $services = $division->services;
 
-       $options = '<option value="">Select Service</option>';
+       $options = '<option value="">Choisissez Service</option>';
        foreach ($services as $service) {
            $options .= '<option value="' . $service->id . '">' . $service->nom_service . '</option>';
        }

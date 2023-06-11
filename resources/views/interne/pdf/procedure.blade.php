@@ -119,7 +119,7 @@ img{
       </div>
       <br>
       <p>
-        DIFFUSION
+       <center>{{$service->where('id', $procedure->service_id)->pluck('nom_service')->first()}}</center> 
       </p>
       <br>
       <div class="parent">

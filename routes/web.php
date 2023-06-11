@@ -119,3 +119,8 @@ Route::get('/view/{id}', [ExterneController::class, 'view'])->middleware('auth')
 Route::get('/procedurefiles', [ExterneController::class, 'getProcedureFiles']);
 Route::get('/divisions/{hospitalId}', [ExterneController::class, 'getDivisions']);
 Route::get('/services/{divisionId}', [ExterneController::class, 'getServices']);
+route::get('/filter-procedurefile',[ManagerController::class,'filterProcedurefile'])->middleware('auth')->name('filter-procedurefile');
+route::get('/filter-Users',[AdminController::class,'filterUsers'])->middleware('auth')->name('filter-Users');
+route::get('/filter-division',[AdminController::class,'filterDivision'])->middleware('auth')->name('filter-division');
+route::get('/filter-service',[AdminController::class,'filterService'])->middleware('auth')->name('filter-service');
+route::get('/filter-unite',[AdminController::class,'filterUnite'])->middleware('auth')->name('filter-unite');

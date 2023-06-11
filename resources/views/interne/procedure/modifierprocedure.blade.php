@@ -96,17 +96,11 @@ License: For each use you must have a valid license purchased only from above li
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('showprocedure') }}" >
-														<span class="menu-title">procedure</span>
+														<span class="menu-title">Procédure</span>
 													</a>
 											</span>
 											</div>
-											<div  class="menu-item menu-lg-down-accordion me-lg-1">
-											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">Hopital</span>
-													</a>
-											</span>
-											</div>
+											
 										</div>
 										<!--end::Menu-->
 									</div>
@@ -138,7 +132,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -158,7 +152,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -213,21 +207,21 @@ License: For each use you must have a valid license purchased only from above li
 						
 						<div class="step-one">
 							<div class="card">
-								<div class="card-title fw-bolder text-gray-800 fs-2 " style= " margin-left:3%" >STEP 1/8 - nom et fonction</div>
+								<div class="card-title fw-bolder text-gray-800 fs-2 " style= " margin-left:3%" >STEP 1/8 - Nom, Fonction et Service</div>
 								<div class="card-body">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for=""> <strong>nom et prenom du redacteur(trice):</strong></label>
-												<input type="text" class="form-control" placeholder="Enter nom et prenom" name="nom_redacteur" value="{{ $procedure->nom_redacteur }}" required>
+												<label for=""> <strong>Nom et prénom du rédacteur(trice):</strong></label>
+												<input type="text" class="form-control" placeholder="Saisissez nom et prénom" name="nom_redacteur" value="{{ $procedure->nom_redacteur }}" required>
 											  
 											</div>
 										</div>
 									</div>
 									<br>
 									<div class="form-group">
-										<label for=""><strong>fonction:</strong></label>
-										<input type="text" class="form-control" placeholder="Enter fonction" name="fonction_redacteur" value="{{ $procedure->fonction_redacteur }}" required>
+										<label for=""><strong>Fonction:</strong></label>
+										<input type="text" class="form-control" placeholder="Saisissez fonction" name="fonction_redacteur" value="{{ $procedure->fonction_redacteur }}" required>
 						
 										
 									</div>
@@ -271,7 +265,7 @@ License: For each use you must have a valid license purchased only from above li
 											</div>
 									<br>
 									<div class="form-group">
-												<label for=""> <strong>la date de creation:</strong></label>
+												<label for=""> <strong>Date de création:</strong></label>
 												<input type="date" class="form-control"  name="date_creation" value="{{ $procedure->date_creation }}" required>
 											   
 											</div>

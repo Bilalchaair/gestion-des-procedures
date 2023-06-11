@@ -13,7 +13,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="">
-	<title>Gestion Des Procedures</title>
+	<title>Gestion Des Procédures</title>
 		<meta name="description" content="Ceres admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="keywords" content="Ceres theme, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -165,17 +165,11 @@ img{
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('showprocedure') }}" >
-														<span class="menu-title">procedure</span>
+														<span class="menu-title">procédure</span>
 													</a>
 											</span>
 											</div>
-											<div  class="menu-item menu-lg-down-accordion me-lg-1">
-											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">Hopital</span>
-													</a>
-											</span>
-											</div>
+								
 										</div>
 										<!--end::Menu-->
 									</div>
@@ -206,7 +200,7 @@ img{
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -226,7 +220,7 @@ img{
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -315,7 +309,7 @@ img{
       </div>
       <br>
       <p>
-        DIFFUSION
+		<center>{{$service->where('id', $procedure->service_id)->pluck('nom_service')->first()}}</center>
       </p>
       <br>
       <div class="parent">

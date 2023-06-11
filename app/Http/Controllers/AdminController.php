@@ -19,8 +19,9 @@ class AdminController extends Controller
       if (Auth::check()) {
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
-            $user = User::all();
-            return view('admin.users.home' , compact('user'));}
+            $User = User::paginate(5);
+            $usertypee='';
+            return view('admin.users.home' , compact('User','usertypee'));}
          } else {
              return view('welcome');
          }
@@ -46,7 +47,7 @@ class AdminController extends Controller
          $user->password = Hash::make($request->password);
          $user->usertype=$request->usertype;
          $user->save();
-         return redirect('users');}
+         return redirect('users')->with('success','Utilisateur ajoutée');}
       } else {
           return view('welcome');
       }
@@ -58,7 +59,7 @@ class AdminController extends Controller
          if ($usertype == 'admin') {
          $user = User::find($id);
          $user->delete();
-         return redirect()->back();}
+         return redirect()->back()->with('error','Utilisateur supprimé');}
       } else {
           return view('welcome');
       }
@@ -85,7 +86,7 @@ class AdminController extends Controller
          $data->password = Hash::make($request->password);
          $data->usertype=$request->usertype;
          $data->save();
-         return redirect('users');}
+         return redirect('users')->with('success','Utilisateur modifié');}
       } else {
           return view('welcome');
       }
@@ -123,7 +124,7 @@ class AdminController extends Controller
          $hopital->nom_hopital=$request->nom_hopital;
          $hopital->adresse=$request->adresse;
          $hopital->save();
-         return redirect('hopital');}
+         return redirect('hopital')->with('success','Hôpital ajouté');}
       } else {
           return view('welcome');
       }
@@ -135,7 +136,7 @@ class AdminController extends Controller
          if ($usertype == 'admin') {
          $hopital = Hopital::find($id);
          $hopital->delete();
-         return redirect()->back();}
+         return redirect()->back()->with('error','Hôpital supprimé');}
       } else {
           return view('welcome');
       }
@@ -160,7 +161,7 @@ class AdminController extends Controller
          $hopital->nom_hopital=$request->nom_hopital;
          $hopital->adresse=$request->adresse;
          $hopital->save();
-         return redirect('hopital');}
+         return redirect('hopital')->with('success','Hôpital modifié');}
       } else {
           return view('welcome');
       }
@@ -172,8 +173,10 @@ class AdminController extends Controller
       if (Auth::check()) {
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
-         $division = Division::all();
-         return view('admin.division.home' , compact('division'));}
+         $division = Division::paginate(5);
+         $hopital = Hopital::all();
+         $hopitalId ='';
+         return view('admin.division.home' , compact('division','hopitalId','hopital'));}
       } else {
           return view('welcome');
       }
@@ -198,7 +201,7 @@ class AdminController extends Controller
          $division->nom_division=$request->nom_division;
          $division->hopital_id=$request->hopital_id;
          $division->save();
-         return redirect('division');}
+         return redirect('division')->with('success','Division ajoutée');}
       } else {
           return view('welcome');
       }
@@ -210,7 +213,7 @@ class AdminController extends Controller
          if ($usertype == 'admin') {
          $division = Division::find($id);
          $division->delete();
-         return redirect()->back();}
+         return redirect()->back()->with('error','Division supprimée');}
       } else {
          return view('welcome');
       }
@@ -236,7 +239,7 @@ class AdminController extends Controller
          $division->nom_division=$request->nom_division;
          $division->hopital_id=$request->hopital_id;
          $division->save();
-         return redirect('division');}
+         return redirect('division')->with('success','Division modifiée');}
       } else {
          return view('welcome');
       }
@@ -247,8 +250,10 @@ class AdminController extends Controller
       if (Auth::check()) {
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
-         $service = Service::all();
-         return view('admin.service.home' , compact('service'));}
+         $service = Service::paginate(5);
+         $division = Division::all();
+         $divisionId ="";
+         return view('admin.service.home' , compact('service','divisionId','division'));}
       } else {
          return view('welcome');
       }
@@ -275,7 +280,7 @@ class AdminController extends Controller
          $service->division_id=$request->division_id;
          $service->hopital_id=$request->hopital_id;
          $service->save();
-         return redirect('service');}
+         return redirect('service')->with('success','service ajouté');}
       } else {
          return view('welcome');
       }
@@ -287,7 +292,7 @@ class AdminController extends Controller
          if ($usertype == 'admin') {
          $service = service::find($id);
          $service->delete();
-         return redirect()->back();}
+         return redirect()->back()->with('error','Service supprimé');}
       } else {
          return view('welcome');
       }
@@ -315,7 +320,7 @@ class AdminController extends Controller
          $service->division_id=$request->division_id;
          $service->hopital_id=$request->hopital_id;
          $service->save();
-         return redirect('service');}
+         return redirect('service')->with('success','service modifié');}
       } else {
          return view('welcome');
       }
@@ -326,8 +331,10 @@ public function showunite()
    if (Auth::check()) {
       $usertype = Auth()->user()->usertype;
       if ($usertype == 'admin') {
-      $unite = unite::all();
-      return view('admin.unite.home' , compact('unite'));}
+      $unite = Unite::paginate(5);
+      $service = Service::all();
+      $serviceId ="";
+      return view('admin.unite.home' , compact('unite','service','serviceId'));}
    } else {
       return view('welcome');
    }
@@ -352,7 +359,7 @@ public function add_unite(Request $request)
       $unite->nom_unite=$request->nom_unite;
       $unite->service_id=$request->service_id;
       $unite->save();
-      return redirect('unite');}
+      return redirect('unite')->with('success','unité ajouté');}
    } else {
       return view('welcome');
    }
@@ -364,7 +371,7 @@ public function delete_unite($id)
       if ($usertype == 'admin') {
       $unite = unite::find($id);
       $unite->delete();
-      return redirect()->back();}
+      return redirect()->back()->with('error','Unité supprimée');}
    } else {
       return view('welcome');
    }
@@ -390,11 +397,119 @@ public function edit_unite(Request $request,$id)
       $unite->nom_unite=$request->nom_unite;
       $unite->service_id=$request->service_id;
       $unite->save();
-      return redirect('unite');}
+      return redirect('unite')->with('success','unité modifiée');}
    } else {
       return view('welcome');
    }
 }
+public function filterUsers(Request $request)
+{
+    
+    $name = $request->input('name','');
+    $usertypee = $request->input('usertypee','');
+    $query = User::query();
 
+    if ($usertypee) {
+      $query->where('usertype', $usertypee);
+  }
+    // Apply service filter if selected
+  
+    // Apply sorting by name if selected
+    if ($name === 'asc') {
+        $query->orderBy('name', 'asc');
+    } elseif ($name === 'desc') {
+        $query->orderBy('name', 'desc');
+    }
+
+    $User = $query->paginate(5);
+    
+    
+
+    return view('admin.users.home', compact('User', 'usertypee'));
+}
+public function filterDivision(Request $request)
+{
+    $hopitalId = $request->input('hopitalId','');
+ 
+    $name = $request->input('name','');
+
+    $query = Division::query();
+
+    // Apply service filter if selected
+    if ($hopitalId) {
+        $query->where('hopital_id', $hopitalId);
+    }
+
+    // Apply sorting order if selected
+    
+    // Apply sorting by name if selected
+    if ($name === 'asc') {
+        $query->orderBy('nom_division', 'asc');
+    } elseif ($name === 'desc') {
+        $query->orderBy('nom_division', 'desc');
+    }
+
+    $division = $query->paginate(5);
+    
+    $hopital = Hopital::all();
+
+    return view('admin.division.home', compact('division', 'hopital','hopitalId'));
+}
+public function filterService(Request $request)
+{
+    $divisionId = $request->input('divisionId','');
+ 
+    $name = $request->input('name','');
+
+    $query = Service::query();
+
+    // Apply service filter if selected
+    if ($divisionId) {
+        $query->where('division_id', $divisionId);
+    }
+
+    // Apply sorting order if selected
+    
+    // Apply sorting by name if selected
+    if ($name === 'asc') {
+        $query->orderBy('nom_service', 'asc');
+    } elseif ($name === 'desc') {
+        $query->orderBy('nom_service', 'desc');
+    }
+
+    $service = $query->paginate(5);
+    
+    $division = Division::all();
+
+    return view('admin.service.home', compact('service', 'division','divisionId'));
+}
+public function filterUnite(Request $request)
+{
+    $serviceId = $request->input('serviceId','');
+ 
+    $name = $request->input('name','');
+
+    $query = Unite::query();
+
+    // Apply service filter if selected
+    if ($serviceId) {
+        $query->where('service_id', $serviceId);
+    }
+
+    // Apply sorting order if selected
+    
+    // Apply sorting by name if selected
+    if ($name === 'asc') {
+        $query->orderBy('nom_unite', 'asc');
+    } elseif ($name === 'desc') {
+        $query->orderBy('nom_unite', 'desc');
+    }
+
+    $unite = $query->paginate(5);
+    
+    $service = Service::all();
+
+    return view('admin.unite.home', compact('unite', 'service','serviceId'));
+}
    
 }

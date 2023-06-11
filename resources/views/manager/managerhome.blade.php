@@ -38,8 +38,8 @@
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
 								<a href="#">
-									<img alt="Logo" src="adminassets/dist/assets/media/logos/logo-light.svg" class="h-15px h-lg-20px logo-default" />
-									<img alt="Logo" src="adminassets/dist/assets/media/logos/logo-default.svg" class="h-15px h-lg-20px logo-sticky" />
+									<img alt="Logo" src="assets/chulogo.png" class="h-15px h-lg-50px logo-default" />
+									<img alt="Logo" src="assets/chulogo.png" class="h-15px h-lg-50px logo-sticky" />
 								</a>
 							</div>
 							<!--end::Header Logo-->
@@ -62,7 +62,7 @@
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{url('upload_procedure')}}" >
-														<span class="menu-title">Procedures</span>
+														<span class="menu-title">Procédures</span>
 													</a>
 											</span>	
 												
@@ -112,7 +112,7 @@
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -132,7 +132,7 @@
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>

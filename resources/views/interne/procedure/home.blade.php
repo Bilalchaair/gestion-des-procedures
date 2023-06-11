@@ -68,54 +68,7 @@
 													</a>
 											</span>
 											</div>
-											<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-lg-1">
-												<span class="menu-link py-3">
-													<span class="menu-title">Hôpital</span>
-													<span class="menu-arrow d-lg-none"></span>
-												</span>
-												<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
-													<div class="menu-item">
-														<a class="menu-link py-3" href="#">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Direction générale</span>
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link py-3" href="#" data-kt-page="pro">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Hôpital des spécialités
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link py-3" href="#" data-kt-page="pro">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Hôpital mère-enfant 
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link py-3" href="#" data-kt-page="pro">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">centre d'oncologie
-														</a>
-													</div>
-													<div class="menu-item">
-														<a class="menu-link py-3" href="#">
-															<span class="menu-bullet">
-																<span class="bullet bullet-dot"></span>
-															</span>
-															<span class="menu-title">Hôpital psychiatrique</span>
-														</a>
-													</div>
-												</div>
-											</div>
+							
 											
 											
 											
@@ -154,7 +107,7 @@
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -174,7 +127,7 @@
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -247,27 +200,27 @@
 						<form action="{{ url('filter-procedure') }}" method="GET">
                             <div class="form-group">
                                 <label for="service">Trier par service:</label>
-                                <select name="service" id="service" class="form-control">
-                                    <option value="">All</option>
+                                <select name="serviceId" id="service" class="form-control" >
+                                    <option value="" >Tous</option>
                                     @foreach($service as $service)
-                                        <option value="{{ $service->id }}">{{ $service->nom_service }}</option>
+                                        <option value="{{ $service->id }}" @if($service->id == $serviceId) selected @endif>{{ $service->nom_service }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="order">Trier par date de création :</label>
-                                <select name="order" id="order" class="form-control">
-                                    <option value="">Default</option>
-                                    <option value="oldest">Oldest</option>
-                                    <option value="newest">Newest</option>
+                                <select name="order" id="order" class="form-control" >
+                                    <option value="" @if(request()->order == '') selected @endif>Par défaut</option>
+                                    <option value="oldest" @if(request()->order == 'oldest') selected @endif>Plus ancien</option>
+                                    <option value="newest" @if(request()->order == 'newest') selected @endif>Plus récent</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="name">Trier par Titre :</label>
                                 <select name="name" id="name" class="form-control">
-                                    <option value="">All</option>
-                                    <option value="asc">A-Z</option>
-                                    <option value="desc">Z-A</option>
+                                    <option value="" @if(request()->name == '') selected @endif>Tous</option>
+                                    <option value="asc" @if(request()->name == 'asc') selected @endif>A-Z</option>
+                                    <option value="desc" @if(request()->name == 'desc') selected @endif>Z-A</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Trier</button>
@@ -295,9 +248,9 @@
 										<td class="align-middle">{{ $rs->nom_redacteur }}</td>
 										<td class="align-middle">
 											<div class="btn-group" role="group" aria-label="Basic example">
-												<a href="{{url('viewprocedure',$rs->id)}}" type="button" class="btn btn-secondary">Detail</a>
-												<a href="{{url('modifierprocedure',$rs->id)}}" type="button" class="btn btn-warning">Edit</a>
-												<a href="{{url('delete_proc',$rs->id)}}" type="button" onclick="event.preventDefault(); showConfirmationModal({{$rs->id}});" class="btn btn-danger">Delete</a>
+												<a href="{{url('viewprocedure',$rs->id)}}" type="button" class="btn btn-secondary">Details</a>
+												<a href="{{url('modifierprocedure',$rs->id)}}" type="button" class="btn btn-warning">Modifier</a>
+												<a href="{{url('delete_proc',$rs->id)}}" type="button" onclick="event.preventDefault(); showConfirmationModal({{$rs->id}});" class="btn btn-danger">Supprimer</a>
 												<a href="{{url('verifierprocedure',$rs->id)}}" type="button" class="btn btn-info">Vérifier</a>
 												<a href="{{url('approuverprocedure',$rs->id)}}" type="button" class="btn btn-success">Approuver</a>
 												@if (!is_null($rs->nom_ver)  && !is_null($rs->nom_app))
@@ -317,12 +270,12 @@
 								@endforeach
 							@else
 								<tr>
-									<td class="text-center" colspan="5">Procedure not found</td>
+									<td class="text-center" colspan="5">Aucune Procédure Trouvée</td>
 								</tr>
 							@endif
 							</tbody>
 						</table>
-						{{ $procedure->links() }}
+						{{ $procedure->appends(request()->query())->links() }}
 					</div>
 				
 					<!--end::Container-->
@@ -347,8 +300,8 @@
                 <h3>Confirmation</h3>
                 <p>Etes-vous sûr(e) de vouloir supprimer cette procédure?</p>
                 <div class="modal-buttons">
-                    <button onclick="confirmDelete()" class="btn btn-danger">Delete</button>
-                    <button onclick="closeConfirmationModal()" class="btn btn-secondary">Cancel</button>
+                    <button onclick="confirmDelete()" class="btn btn-danger">Supprimer</button>
+                    <button onclick="closeConfirmationModal()" class="btn btn-secondary">Annuler</button>
                 </div>
             </div>
         </div>

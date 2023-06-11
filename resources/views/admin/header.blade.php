@@ -49,35 +49,35 @@
 											<div class="menu-item menu-lg-down-accordion me-lg-1">
 												<span class="menu-link py-3" >
 													<a class="menu-title" href="{{ route('users') }}" >
-														<span class="menu-title" >Users</span>
+														<span class="menu-title" >Utilisateurs</span>
 													</a>
 												</span>	
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('hopital') }}" >
-														<span class="menu-title">Hôpital</span>
+														<span class="menu-title">Hôpitaux</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('division') }}" >
-														<span class="menu-title">Division</span>
+														<span class="menu-title">Divisions</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('service') }}" >
-														<span class="menu-title">service</span>
+														<span class="menu-title">services</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('unite') }}" >
-														<span class="menu-title">unité </span>
+														<span class="menu-title">unités </span>
 													</a>
 											</span>
 											</div>
@@ -112,7 +112,7 @@
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -132,7 +132,7 @@
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Procedurefile;
 use App\Models\Service;
+
 use Illuminate\Support\Facades\Auth;
 
 class ManagerController extends Controller
@@ -14,8 +15,10 @@ class ManagerController extends Controller
         if (Auth::check()) {
             $usertype = Auth()->user()->usertype;
             if ($usertype == 'manager') {
-        $procedure = procedurefile::all();
-        return view('manager.procedure',compact('procedure'));}
+        $procedure = procedurefile::paginate(5);
+        $service = Service::all();
+        $serviceId ='';
+        return view('manager.procedure',compact('procedure','service','serviceId'));}
         } else {
         return view('welcome');
         }
@@ -44,7 +47,7 @@ class ManagerController extends Controller
         $procedure->file=$filename;
         $procedure->service_id=$request->service_id;
         $procedure->save();
-        return redirect('upload_procedure');}
+        return redirect('upload_procedure')->with('success','Procédure Publiée');}
         } else {
         return view('welcome');
         }
@@ -56,7 +59,7 @@ class ManagerController extends Controller
             if ($usertype == 'manager') {
             $procedure = Procedurefile::find($id);
             $procedure->delete();
-            return redirect()->back();}
+            return redirect()->back()->with('error','Procédure supprimée');}
         } else {
         return view('welcome');
         }
@@ -86,11 +89,40 @@ class ManagerController extends Controller
                 $procedure->file=$filename;
             $procedure->service_id=$request->service_id;
             $procedure->save();
-            return redirect('upload_procedure');}
+            return redirect('upload_procedure')->with('success','Procédure modifiée');}
         } else {
         return view('welcome');
         }
     }
+    public function filterProcedurefile(Request $request)
+{
+    $serviceId = $request->input('serviceId','');
+    
+    $name = $request->input('name','');
+
+    $query = Procedurefile::query();
+
+    // Apply service filter if selected
+    if ($serviceId) {
+        $query->where('service_id', $serviceId);
+    }
+
+    // Apply sorting order if selected
+  
+
+    // Apply sorting by name if selected
+    if ($name === 'asc') {
+        $query->orderBy('nom_procedure', 'asc');
+    } elseif ($name === 'desc') {
+        $query->orderBy('nom_procedure', 'desc');
+    }
+
+    $procedure = $query->paginate(5);
+    
+    $service = Service::all();
+
+    return view('manager.procedure', compact('procedure', 'service','serviceId'));
+}
    /* public function show()
     {
         $procedure= new procedurefile;

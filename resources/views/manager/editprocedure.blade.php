@@ -40,8 +40,8 @@
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
 								<a href="#">
-									<img alt="Logo" src="<?php echo asset('adminassets/dist/assets/media/logos/logo-light.svg')?>" class="h-15px h-lg-20px logo-default" />
-									<img alt="Logo" src="<?php echo asset('adminassets/dist/assets/media/logos/logo-default.svg')?>" class="h-15px h-lg-20px logo-sticky" />
+									<img alt="Logo" src="<?php echo asset('assets/chulogo.png') ?>" class="h-15px h-lg-50px logo-default" />
+									<img alt="Logo" src="<?php echo asset('assets/chulogo.png') ?>" class="h-15px h-lg-50px logo-sticky" />
 								</a>
 							</div>
 							<!--end::Header Logo-->
@@ -64,7 +64,7 @@
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{url('upload_procedure')}}" >
-														<span class="menu-title">Procedures</span>
+														<span class="menu-title">Procédures</span>
 													</a>
 											</span>	
 												
@@ -114,7 +114,7 @@
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -134,7 +134,7 @@
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -166,7 +166,7 @@
 						<!--begin::Container-->
 						<div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
 							<!--begin::Title-->
-							<h3 class="text-white fw-bolder fs-2qx me-5">upload procedure</h3>
+							<h3 class="text-white fw-bolder fs-2qx me-5">Modifier procédure</h3>
 							<!--begin::Title-->
 							<!--begin::Actions-->
 							<div class="d-flex align-items-center flex-wrap py-2">
@@ -191,11 +191,11 @@
                                     <form action="{{url('edit_procedure',$procedure->id)}}" method="POST" enctype="multipart/form-data" class="select">
                                          @csrf
                                     <div class="labels">
-                                        <label>nom du procedure :</label>
+                                        <label>nom de la procédure :</label>
                                         <input type="text" name="nom_procedure" value="{{$procedure->nom_procedure}}">
                                     </div>
                                     <div class="labels">
-                                        <label>file :</label>
+                                        <label>fichier :</label>
                                         <input type="file" name="file">
                                     </div>
                                     <div class="labels">
@@ -206,7 +206,7 @@
                                         </select>
                                     </div>
                                     <div >
-                                    <input type="submit" value="Submit" class="submit">
+                                    <input type="submit" value="Modifier" class="submit">
                                     </div>
 
 

@@ -11,16 +11,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for=""> <strong>nom et prenom du redacteur(trice):</strong></label>
-                        <input type="text" class="form-control" placeholder="Enter nom et prenom" wire:model="nom_redacteur">
+                        <label for=""> <strong>Nom et prénom du rédacteur(trice):</strong></label>
+                        <input type="text" class="form-control" placeholder="Saissez nom et prénom" wire:model="nom_redacteur">
                        <span class="text-danger">@error('nom_redacteur'){{ $message }}@enderror</span>
                     </div>
                 </div>
             </div>
             <br>
             <div class="form-group">
-                <label for=""><strong>fonction:</strong></label>
-                <input type="text" class="form-control" placeholder="Enter fonction" wire:model="fonction_redacteur">
+                <label for=""><strong>Fonction :</strong></label>
+                <input type="text" class="form-control" placeholder="Saisissez fonction" wire:model="fonction_redacteur">
 
                 <span class="text-danger">@error('fonction_redacteur'){{ $message }}@enderror</span>
             </div>
@@ -55,7 +55,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for=""> <strong>Titre de la procédure:</strong></label>
-                        <input type="text" class="form-control" placeholder="Enter titre procédure" wire:model="nom_proc">
+                        <input type="text" class="form-control" placeholder="Entrer titre procédure" wire:model="nom_proc">
                        <span class="text-danger">@error('nom_proc'){{ $message }}@enderror</span>
                     </div>
                 </div>
@@ -63,12 +63,12 @@
             
             <div class="form-group">
                         <label for=""> <strong>Référence:</strong></label>
-                        <input type="text" class="form-control" placeholder="Enter le Référence" wire:model="reference_code">
+                        <input type="text" class="form-control" placeholder="Entrer le Référence" wire:model="reference_code">
                        <span class="text-danger">@error('reference_code'){{ $message }}@enderror</span>
                     </div>
             <br>
             <div class="form-group">
-                        <label for=""> <strong>la date de creation:</strong></label>
+                        <label for=""> <strong>Date de création:</strong></label>
                         <input type="date" class="form-control"  wire:model="date_creation">
                        <span class="text-danger">@error('date_creation'){{ $message }}@enderror</span>
                     </div>
@@ -202,11 +202,14 @@
  
         <span class="text-danger">@error('enregistrement'){{ $message }}@enderror</span>
        </div>
+      
+       <div class="card-body">
        <div class="form-group">
                 <label for=""><strong>Codes des enregistrement</strong></label>
                 <textarea class="form-control" cols="2" rows="8" wire:model="enregistrement_code"></textarea>
                 <span class="text-danger">@error('enregistrement_code'){{ $message }}@enderror</span>
             </div>
+        </div>
     </div>
 </div>
 @endif
@@ -217,11 +220,11 @@
    @endif
 
    @if ($currentStep == 2 || $currentStep == 3 || $currentStep == 4 || $currentStep == 5 || $currentStep == 6 || $currentStep == 7 || $currentStep == 8)
-       <button type="button" class="buttoncss" wire:click="decreaseStep()">Back</button>
+       <button type="button" class="buttoncss" wire:click="decreaseStep()">Retour</button>
    @endif
    
    @if ($currentStep == 1 || $currentStep == 2 || $currentStep == 3 || $currentStep == 4 || $currentStep == 5 || $currentStep == 6 || $currentStep == 7)
-       <button type="button" class="buttoncss" wire:click="increaseStep()">Next</button>
+       <button type="button" class="buttoncss" wire:click="increaseStep()">Suivant</button>
    @endif
    
    @if ($currentStep == 8)

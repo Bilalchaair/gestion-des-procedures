@@ -91,35 +91,35 @@ License: For each use you must have a valid license purchased only from above li
 											<div class="menu-item here show menu-lg-down-accordion me-lg-1">
 												<span class="menu-link py-3" >
 													<a class="menu-title" href="{{ route('users') }}" >
-														<span class="menu-title" >Users</span>
+														<span class="menu-title" >Utilisateurs</span>
 													</a>
 												</span>	
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('hopital') }}" >
-														<span class="menu-title">Hôpital</span>
+														<span class="menu-title">Hôpitaux</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('division') }}" >
-														<span class="menu-title">Division</span>
+														<span class="menu-title">Divisions</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('service') }}" >
-														<span class="menu-title">service</span>
+														<span class="menu-title">services</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('unite') }}" >
-														<span class="menu-title">unité </span>
+														<span class="menu-title">unités </span>
 													</a>
 											</span>
 											</div>
@@ -154,7 +154,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -174,7 +174,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -204,7 +204,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Container-->
 						<div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
 							<!--begin::Title-->
-							<h3 class="text-white fw-bolder fs-2qx me-5">Users management</h3>
+							<h3 class="text-white fw-bolder fs-2qx me-5">Gestion des utilisateurs</h3>
 							<!--begin::Title-->
 							<!--begin::Actions-->
 							<div class="d-flex align-items-center flex-wrap py-2">
@@ -214,7 +214,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <div >
 									<span  >
 									<a href="{{ route('adduser') }}" >
-									<span class="buttoncss" >add user</span>
+									<span class="buttoncss" >Ajouter utilisateur</span>
 									</a>
 								</span>	
 								</div>
@@ -230,19 +230,53 @@ License: For each use you must have a valid license purchased only from above li
 					</div>
 					<!--end::Toolbar-->
 					<div class="forms">
+						@if(Session::has('success'))
+						<div class="alert alert-success" role="alert" id="alert">
+							
+							{{ Session::get('success') }}
+						</div>
+					@endif
+					@if(Session::has('error'))
+						<div class="alert alert-danger" role="alert" id="alert">
+							
+							{{ Session::get('error') }}
+						</div>
+					@endif
+					<form action="{{ url('filter-Users') }}" method="GET">
+
+						<div class="form-group">
+							<label for="name">Trier par Nom :</label>
+							<select name="name" id="name" class="form-control">
+								<option value="" @if(request()->name == '') selected @endif>Tous</option>
+								<option value="asc" @if(request()->name == 'asc') selected @endif>A-Z</option>
+								<option value="desc" @if(request()->name == 'desc') selected @endif>Z-A</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="usertype">Trier par Type:</label>
+							<select name="usertypee" id="usertype" class="form-control" >
+								<option value="" >Tous</option>
+								<option value="user1" @if(request()->usertypee == 'user1') selected @endif>Interne</option>
+								<option value="user" @if(request()->usertypee == 'user') selected @endif>Externe</option>
+								<option value="manager" @if(request()->usertypee == 'manager') selected @endif>Manager</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">Trier</button>
+					</form>
 					<table class="styled-table">
     					<thead>
         					<tr>
 								<th>Id</th>
-								<th>Name</th>
+								<th>Nom</th>
             					<th>Email</th>
 								
-								<th>Usertype</th>
+								<th>Type</th>
 								<th>Action</th>
        						 </tr>
     					</thead>
     				<tbody>
-					@foreach($user->where('usertype', '!=', 'admin') as $user)
+						@if($User->count() > 0)
+					@foreach($User as $user)
         					
         					<tr class="active-row">
 								<td>{{$user->id}}</td>
@@ -251,14 +285,20 @@ License: For each use you must have a valid license purchased only from above li
 								
 								<td>{{$user->usertype}}</td>
 								<td>
-									<a href="{{url('delete_user',$user->id)}}" class="btn">delete</a>
-									<a href="{{url('update_user',$user->id)}}" class="btn">update</a>
+									<a href="{{url('delete_user',$user->id)}}" onclick="event.preventDefault(); showConfirmationModal({{$user->id}});" class="btn">Supprimer</a>
+									<a href="{{url('update_user',$user->id)}}" class="btn">Modifier</a>
 								</td>
         					</tr>
 						@endforeach
+						@else
+						<tr>
+							<td class="text-center" colspan="5">Aucun utilisateur Trouvé</td>
+						</tr>
+					@endif
         				<!-- and so on... -->
     				</tbody>
 					</table>
+					{{ $User->appends(request()->query())->links() }}
 					</div>
 					
 				</div>
@@ -278,6 +318,98 @@ License: For each use you must have a valid license purchased only from above li
 			</span>
 			<!--end::Svg Icon-->
 		</div>
+	</div>
+	<div id="confirmationModal" class="modal">
+		<div class="modal-overlay"></div>
+		<div class="modal-content">
+			<h3>Confirmation</h3>
+			<p>Etes-vous sûr(e) de vouloir supprimer cet utilisateur?</p>
+			<div class="modal-buttons">
+				<button onclick="confirmDelete()" class="btn btn-danger">Supprimer</button>
+				<button onclick="closeConfirmationModal()" class="btn btn-secondary">Annuler</button>
+			</div>
+		</div>
+	</div>
+	<style>
+			.form-group {
+  display: inline-block;
+  margin-right: 10px;
+  width: 200px;
+}
+
+button[type="submit"] {
+  display: inline-block;
+ 
+}
+              .modal {
+        position: fixed;
+        top: 0;
+        left: 25%;
+        width: 50%;
+        height: 100%;
+        display: none;
+        z-index: 9999;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 9999;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+        text-align: right;
+}
+</style>
+<script>
+var deleteId;
+
+function showConfirmationModal(id) {
+deleteId = id;
+var modal = document.getElementById('confirmationModal');
+modal.style.display = 'block';
+}
+
+function closeConfirmationModal() {
+var modal = document.getElementById('confirmationModal');
+modal.style.display = 'none';
+}
+
+function confirmDelete() {
+var modal = document.getElementById('confirmationModal');
+modal.style.display = 'none';
+window.location.href = "{{ url('delete_user') }}/" + deleteId;
+}
+</script>
+
+
+<script
+src="https://code.jquery.com/jquery-3.7.0.js"
+integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+	setTimeout(function() {
+		$('#alert').fadeOut('fast');
+	}, 4000);
+});
+</script>
 		<!--end::Scrolltop-->
 		<!--end::Main-->
 		<script>var hostUrl = "adminassets/dist/assets/";</script>

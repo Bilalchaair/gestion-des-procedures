@@ -31,8 +31,8 @@
 			
 			<div id="main-nav" class="collapse navbar-collapse">
 				<ul class="navbar-nav ml-auto">
-					<li><a href="{{route('home')}}" class="nav-item nav-link active">Home</a></li>
-					<li><a href="{{ route('page_procedure') }}" class="nav-item nav-link">Les procedures</a></li>
+					<li><a href="{{route('home')}}" class="nav-item nav-link active">Accueil</a></li>
+					<li><a href="{{ route('page_procedure') }}" class="nav-item nav-link">Les procédures</a></li>
 					<li><a href="#" class="nav-item nav-link">Contact</a></li>
 					<li><div class="nav-item nav-link">
 						@if (Route::has('login'))
@@ -58,7 +58,7 @@
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -78,7 +78,7 @@
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -100,10 +100,10 @@
 								</div>
 								<!--end::Topbar-->
 							@else
-								<a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+								<a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Se connecter</a>
 		
 								@if (Route::has('register'))
-									<a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+									<a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">S'inscrire</a>
 								@endif
 							@endauth
 						</div>

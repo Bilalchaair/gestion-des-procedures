@@ -93,35 +93,35 @@ License: For each use you must have a valid license purchased only from above li
 											<div class="menu-item  menu-lg-down-accordion me-lg-1">
 												<span class="menu-link py-3" >
 													<a class="menu-title" href="{{ route('users') }}" >
-														<span class="menu-title" >Users</span>
+														<span class="menu-title" >Utilisateurs</span>
 													</a>
 												</span>	
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('hopital') }}" >
-														<span class="menu-title">Hôpital</span>
+														<span class="menu-title">Hôpitaux</span>
 													</a>
 											</span>
 											</div>
                                             <div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('division') }}" >
-														<span class="menu-title">division </span>
+														<span class="menu-title">divisions </span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('service') }}" >
-														<span class="menu-title">service</span>
+														<span class="menu-title">services</span>
 													</a>
 											</span>
 											</div>
                                             <div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('unite') }}" >
-														<span class="menu-title">unité </span>
+														<span class="menu-title">unités </span>
 													</a>
 											</span>
 											</div>
@@ -141,7 +141,7 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-												<img alt="Pic" src="assets/user.png" />
+												<img alt="Pic" src="<?php echo asset('assets/user.png') ?>" />
 											</div>
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -156,7 +156,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -176,7 +176,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -206,7 +206,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Container-->
 						<div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
 							<!--begin::Title-->
-							<h3 class="text-white fw-bolder fs-2qx me-5">Add User</h3>
+							<h3 class="text-white fw-bolder fs-2qx me-5">Modifier Division</h3>
 							<!--begin::Title-->
 							<!--begin::Actions-->
 							<div class="d-flex align-items-center flex-wrap py-2">
@@ -227,7 +227,7 @@ License: For each use you must have a valid license purchased only from above li
                     <form action="{{url('edit_division',$division->id)}}" method="POST" enctype="multipart/form-data" class="select">
                         @csrf
                                     <div class="labels">
-                                        <label>nom de division :</label>
+                                        <label>Nom de division :</label>
                                         <input type="text" name="nom_division" value="{{$division->nom_division}}">
                                     </div>
                                     <div class="labels">
@@ -240,7 +240,7 @@ License: For each use you must have a valid license purchased only from above li
 										
                                     </div>
                                     <div >
-                                    <input type="submit" value="Submit" class="submit">
+                                    <input type="submit" value="Modifier" class="submit">
                                     </div>
 
 

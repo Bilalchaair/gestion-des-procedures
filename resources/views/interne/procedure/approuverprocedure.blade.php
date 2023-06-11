@@ -70,8 +70,8 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
 								<a href="#">
-									<img alt="Logo" src="assets/chulogo.png" class="h-15px h-lg-50px logo-default" />
-									<img alt="Logo" src="assets/chulogo.png" class="h-15px h-lg-50px logo-sticky" />
+									<img alt="Logo" src="<?php echo asset('assets/chulogo.png') ?>" class="h-15px h-lg-50px logo-default" />
+									<img alt="Logo" src="<?php echo asset('assets/chulogo.png') ?>" class="h-15px h-lg-50px logo-sticky" />
 								</a>
 							</div>
 							<!--end::Header Logo-->
@@ -95,17 +95,11 @@ License: For each use you must have a valid license purchased only from above li
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('showprocedure') }}" >
-														<span class="menu-title">procedure</span>
+														<span class="menu-title">Procédure</span>
 													</a>
 											</span>
 											</div>
-											<div  class="menu-item menu-lg-down-accordion me-lg-1">
-											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">Hopital</span>
-													</a>
-											</span>
-											</div>
+									
 										</div>
 										<!--end::Menu-->
 									</div>
@@ -121,7 +115,7 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-												<img alt="Pic" src="assets/user.png" />
+												<img alt="Pic" src="<?php echo asset('assets/user.png') ?>" />
 											</div>
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -136,7 +130,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -156,7 +150,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -208,7 +202,7 @@ License: For each use you must have a valid license purchased only from above li
 							@csrf
 							<div class="row">
 								<div class="col mb-3">
-									<label class="form-label">Nom de l'approbateur</label>
+									<label class="form-label">Nom de l'approbateur :</label>
 									<input type="text" name="nom_app" class="form-control" placeholder="Nom" value="{{ $procedure->nom_app }}" required>
 									<span class="text-danger">@error('nom_app'){{ $message }}@enderror</span>
 								</div>
@@ -216,14 +210,14 @@ License: For each use you must have a valid license purchased only from above li
 							</div>
 							<div class="row">
 								<div class="col mb-3">
-									<label class="form-label">Fonction de l'approbateur</label>
+									<label class="form-label">Fonction de l'approbateur :</label>
 									<input type="text" name="fonction_app" class="form-control" placeholder="Fonction" value="{{ $procedure->fonction_app }}" required>
 								</div>
 							  
 							</div>
 							<div class="row">
 								<div class="col mb-3">
-									<label class="form-label">date de l'approbation</label>
+									<label class="form-label">Date de l'approbation :</label>
 									<input type="date" name="date_approvation" class="form-control" placeholder="Fonction" value="{{ $procedure->date_approvation }}" required>
 								</div>
 							  

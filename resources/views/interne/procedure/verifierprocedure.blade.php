@@ -96,17 +96,11 @@ License: For each use you must have a valid license purchased only from above li
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('showprocedure') }}" >
-														<span class="menu-title">procedure</span>
+														<span class="menu-title">Procédure</span>
 													</a>
 											</span>
 											</div>
-											<div  class="menu-item menu-lg-down-accordion me-lg-1">
-											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">Hopital</span>
-													</a>
-											</span>
-											</div>
+						
 										</div>
 										<!--end::Menu-->
 									</div>
@@ -138,7 +132,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -158,7 +152,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -210,7 +204,7 @@ License: For each use you must have a valid license purchased only from above li
 							@csrf
 							<div class="row">
 								<div class="col mb-3">
-									<label class="form-label">Nom du Vérificateur</label>
+									<label class="form-label">Nom du Vérificateur :</label>
 									<input type="text" name="nom_ver" class="form-control" placeholder="Nom" value="{{ $procedure->nom_ver }}" required>
 									<span class="text-danger">@error('nom_ver'){{ $message }}@enderror</span>
 								</div>
@@ -218,7 +212,7 @@ License: For each use you must have a valid license purchased only from above li
 							</div>
 							<div class="row">
 								<div class="col mb-3">
-									<label class="form-label">Fonction du Vérificateur</label>
+									<label class="form-label">Fonction du Vérificateur :</label>
 									<input type="text" name="fonction_ver" class="form-control" placeholder="Fonction" value="{{ $procedure->fonction_ver }}" required>
 								</div>
 							  

@@ -17,9 +17,10 @@ class InterneController extends Controller
     if (Auth::check()) {
         $usertype = Auth()->user()->usertype;
         if ($usertype == 'user1') {
-        $procedure = Procedure::paginate(5);
+        $procedure = Procedure::paginate(3);
         $service = Service::all();
-        return view('interne.procedure.home',compact('procedure','service'));}
+        $serviceId ='';
+        return view('interne.procedure.home',compact('procedure','service','serviceId'));}
     } else {
         return view('welcome');
     }
@@ -175,11 +176,12 @@ class InterneController extends Controller
         $usertype = Auth()->user()->usertype;
         if ($usertype == 'user1') {
     $procedure=Procedure::find($id);
+    $service= Service::all();
     $path = storage_path('app/logigrammes/' . $procedure->logigramme); // Replace 'image.jpg' with the actual filename
     $type = pathinfo($path, PATHINFO_EXTENSION);
     $data = file_get_contents($path);
     $pic = 'data:image/'. $type. ';base64,'. base64_encode($data);
-    $pdf = PDF::loadView('interne.pdf.procedure', ['procedure' => $procedure,'pic'=>$pic]);
+    $pdf = PDF::loadView('interne.pdf.procedure', ['procedure' => $procedure,'pic'=>$pic,'service'=>$service]);
     return $pdf->download('procedure.pdf');}
     } else {
         return view('welcome');
@@ -187,7 +189,7 @@ class InterneController extends Controller
    }
    public function filterProcedure(Request $request)
 {
-    $serviceId = $request->input('service','');
+    $serviceId = $request->input('serviceId','');
     $order = $request->input('order','');
     $name = $request->input('name','');
 
@@ -212,19 +214,20 @@ class InterneController extends Controller
         $query->orderBy('nom_proc', 'desc');
     }
 
-    $procedure = $query->paginate(5);
-
+    $procedure = $query->paginate(3);
+    
     $service = Service::all();
 
-    return view('interne.procedure.home', compact('procedure', 'service'));
+    return view('interne.procedure.home', compact('procedure', 'service','serviceId'));
 }
 public function viewprocedure($id){
     $procedure = Procedure::find($id);
+    $service = Service::all();
     $path = storage_path('app/logigrammes/' . $procedure->logigramme); // Replace 'image.jpg' with the actual filename
     $type = pathinfo($path, PATHINFO_EXTENSION);
     $data = file_get_contents($path);
     $pic = 'data:image/'. $type. ';base64,'. base64_encode($data);
-    return view('interne.procedure.viewprocedure',compact('procedure','pic'));
+    return view('interne.procedure.viewprocedure',compact('procedure','pic','service'));
 }
    
 }

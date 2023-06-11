@@ -95,17 +95,11 @@ License: For each use you must have a valid license purchased only from above li
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('showprocedure') }}" >
-														<span class="menu-title">procedure</span>
+														<span class="menu-title">Procédure</span>
 													</a>
 											</span>
 											</div>
-											<div  class="menu-item menu-lg-down-accordion me-lg-1">
-											<span class="menu-link py-3">
-													<a class="menu-title" href="{{ url('admin.users.home') }}" >
-														<span class="menu-title">Hopital</span>
-													</a>
-											</span>
-											</div>
+											
 										</div>
 										<!--end::Menu-->
 									</div>
@@ -136,7 +130,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -156,7 +150,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -186,7 +180,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Container-->
 						<div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
 							<!--begin::Title-->
-							<h3 class="text-white fw-bolder fs-2qx me-5">Add procedure</h3>
+							<h3 class="text-white fw-bolder fs-2qx me-5">Ajouter procédure</h3>
 							<!--begin::Title-->
 							<!--begin::Actions-->
 							<div class="d-flex align-items-center flex-wrap py-2">

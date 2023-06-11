@@ -93,35 +93,35 @@ License: For each use you must have a valid license purchased only from above li
 											<div class="menu-item menu-lg-down-accordion me-lg-1">
 												<span class="menu-link py-3" >
 													<a class="menu-title" href="{{ route('users') }}" >
-														<span class="menu-title" >Users</span>
+														<span class="menu-title" >Utilisateurs</span>
 													</a>
 												</span>	
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('hopital') }}" >
-														<span class="menu-title">Hôpital</span>
+														<span class="menu-title">Hôpitaux</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('division') }}" >
-														<span class="menu-title">Division</span>
+														<span class="menu-title">Divisions</span>
 													</a>
 											</span>
 											</div>
 											<div  class="menu-item here show menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('service') }}" >
-														<span class="menu-title">service</span>
+														<span class="menu-title">services</span>
 													</a>
 											</span>
 											</div>
                                             <div  class="menu-item menu-lg-down-accordion me-lg-1">
 											<span class="menu-link py-3">
 													<a class="menu-title" href="{{ route('unite') }}" >
-														<span class="menu-title">unité </span>
+														<span class="menu-title">unités </span>
 													</a>
 											</span>
 											</div>
@@ -141,7 +141,7 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-												<img alt="Pic" src="assets/user.png" />
+												<img alt="Pic" src="<?php echo asset('assets/user.png') ?>" />
 											</div>
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -156,7 +156,7 @@ License: For each use you must have a valid license purchased only from above li
 												<div class="menu-item px-5">
 													<a href="route('profile.edit')" class="menu-link px-5">
                                                     <x-dropdown-link :href="route('profile.edit')">
-                                                        {{ __('Setiings') }}
+                                                        {{ __('Paramètres') }}
                                                     </x-dropdown-link>
 														
 													</a>
@@ -176,7 +176,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             <x-dropdown-link :href="route('logout')"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                                                {{ __('Log Out') }}
+                                                                {{ __('Se déconnecter') }}
                                                             </x-dropdown-link>
                                                 </form>
 												</div>
@@ -226,31 +226,31 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="forms">
                     <form action="{{url('edit_service',$service->id)}}" method="POST" enctype="multipart/form-data" class="select">
                         @csrf
+					
                                     <div class="labels">
-                                        <label>nom du service :</label>
+                                        <label>Nom du service :</label>
                                         <input type="text" name="nom_service" value="{{$service->nom_service}}">
                                     </div>
-                                    <div class="labels">
-                                        <label> Division:</label>
-										
-                                        <select name="division_id"  >
-										@foreach($division as $item)
-                                            <option value="{{$item->id}}">{{$item->nom_division}}</option>
-										@endforeach	
-                                        </select>
-										
-                                    </div>
-                                    <div class="labels">
+									<div class="labels">
                                         <label> Hôpital:</label>
-                                        <select name="hopital_id" >
+                                        <select name="hopital_id" id="hopital-select">
 										@foreach($hopital as $data)
                                             <option value="{{$data->id}}">{{$data->nom_hopital}}</option>
 										@endforeach	
                                         </select>
 										
                                     </div>
+                                    <div class="labels">
+                                        <label> Division:</label>
+										
+                                        <select name="division_id" id="division-select" >
+					
+                                        </select>
+										
+                                    </div>
+                                  
                                     <div >
-                                    <input type="submit" value="Submit" class="submit">
+                                    <input type="submit" value="Modifier" class="submit">
                                     </div>
 
 
@@ -277,6 +277,38 @@ License: For each use you must have a valid license purchased only from above li
 			</span>
 			<!--end::Svg Icon-->
 		</div>
+		<script>
+            // Retrieve the elements
+            var hopitalSelect = document.getElementById('hopital-select');
+            var divisionSelect = document.getElementById('division-select');
+
+            // Event listener for hopital select change
+            hopitalSelect.addEventListener('change', function() {
+                var selectedHopitalId = hopitalSelect.value;
+                updateDivisionOptions(selectedHopitalId);
+            });
+
+            // Function to update division options based on the selected hopital
+            function updateDivisionOptions(selectedHopitalId) {
+                // Clear existing options
+                divisionSelect.innerHTML = '';
+
+                // Add division options that match the selected hopital
+                @foreach($division as $division)
+
+                        if (selectedHopitalId === '{{$division->hopital_id}}') {
+                            var option = document.createElement('option');
+                            option.value = '{{$division->id}}';
+                            option.textContent = '{{$division->nom_division}}';
+                            divisionSelect.appendChild(option);
+                        }
+
+                @endforeach
+            }
+
+            // Trigger initial update of division options
+            updateDivisionOptions(hopitalSelect.value);
+        </script>
 		<!--end::Scrolltop-->
 		<!--end::Main-->
 		<script>var hostUrl = "<?php echo asset('adminassets/dist/assets/')?>";</script>
