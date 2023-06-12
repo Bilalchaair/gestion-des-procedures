@@ -266,12 +266,12 @@ License: For each use you must have a valid license purchased only from above li
 					<table class="styled-table">
     					<thead>
         					<tr>
-								<th>Id</th>
+								
 								<th>Nom</th>
             					<th>Email</th>
 								
 								<th>Type</th>
-								<th>Action</th>
+								<th><center>Action</center></th>
        						 </tr>
     					</thead>
     				<tbody>
@@ -279,15 +279,23 @@ License: For each use you must have a valid license purchased only from above li
 					@foreach($User as $user)
         					
         					<tr class="active-row">
-								<td>{{$user->id}}</td>
+								
 								<td>{{$user->name}}</td>
 								<td>{{$user->email}}</td>
 								
-								<td>{{$user->usertype}}</td>
-								<td>
+								<td> @if($user->usertype == 'user1')
+									Interne
+								  @elseif ($user->usertype == 'user')
+									Externe
+								  @elseif ($user->usertype == 'manager')
+									Manager
+								  @elseif ($user->usertype == 'admin')
+									Administrateur
+								  @endif</td>
+								<td><center>
 									<a href="{{url('delete_user',$user->id)}}" onclick="event.preventDefault(); showConfirmationModal({{$user->id}});" class="btn">Supprimer</a>
 									<a href="{{url('update_user',$user->id)}}" class="btn">Modifier</a>
-								</td>
+								</center></td>
         					</tr>
 						@endforeach
 						@else

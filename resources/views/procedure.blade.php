@@ -70,8 +70,8 @@
 			
 			<div id="main-nav" class="collapse navbar-collapse">
 				<ul class="navbar-nav ml-auto">
-					<li><a href="{{route('home')}}" class="nav-item nav-link ">Home</a></li>
-					<li><a href="{{ route('page_procedure') }}" class="nav-item nav-link active">Les procedures</a></li>
+					<li><a href="{{route('home')}}" class="nav-item nav-link ">Accueil</a></li>
+					<li><a href="{{ route('page_procedure') }}" class="nav-item nav-link active">Les procédures</a></li>
 					<li><a href="#" class="nav-item nav-link">Contact</a></li>
 					<li><div class="nav-item nav-link">
 						@if (Route::has('login'))

@@ -228,12 +228,12 @@
 						<table class="table table-hover">
 							<thead class="table-primary">
 								<tr>
-									<th> <strong># </strong></th>
+									
 									<th> <strong>Titre </strong></th>
 									<th><strong> Code_Référence </strong></th>
 									<th> <strong>Date_Création </strong></th>
 									<th> <strong>Rédacteur </strong></th>
-									<th> <strong>Action </strong></th>
+									<th> <strong><center>Action</center> </strong></th>
 									<th> <strong>État</strong></th>
 								</tr>
 							</thead>
@@ -241,7 +241,7 @@
 								@if($procedure->count() > 0)
 								@foreach($procedure as $rs)
 									<tr>
-										<td class="align-middle">{{ $loop->iteration }}</td>
+										
 										<td class="align-middle">{{ $rs->nom_proc }}</td>
 										<td class="align-middle">{{ $rs->reference_code }}</td>
 										<td class="align-middle">{{ $rs->date_creation }}</td>
@@ -260,11 +260,11 @@
 											</div>
 										</td>
 										<td class="align-middle">@if (is_null($rs->nom_ver)  && is_null($rs->nom_app))
-											Rédigée
+											<strong>Rédigée</strong>
 											@elseif (!is_null($rs->nom_ver)  && is_null($rs->nom_app))
-											Vérifiée
+											<strong style="color: purple">Vérifiée</strong>
 											@elseif (!is_null($rs->nom_ver)  && !is_null($rs->nom_app))
-                                            Approuvée
+                                           <strong style="color: green">Approuvée✓</strong> 
 										@endif</td>
 									</tr>
 								@endforeach

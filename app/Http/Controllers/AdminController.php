@@ -252,8 +252,9 @@ class AdminController extends Controller
          if ($usertype == 'admin') {
          $service = Service::paginate(5);
          $division = Division::all();
+         $hopital = Hopital::all();
          $divisionId ="";
-         return view('admin.service.home' , compact('service','divisionId','division'));}
+         return view('admin.service.home' , compact('service','divisionId','division','hopital'));}
       } else {
          return view('welcome');
       }

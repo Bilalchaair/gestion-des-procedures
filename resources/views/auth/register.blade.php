@@ -29,7 +29,7 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Mot de passe')" />
+            <x-input-label for="password" :value="__('Mot de passe')" onpaste="return false;"/>
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -60,4 +60,12 @@
             </x-primary-button>
         </div>
     </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+  var passwordField = document.getElementById('password');
+  passwordField.addEventListener('input', function() {
+    passwordField.setAttribute('type', 'password');
+  });
+});
+    </script>
 </x-guest-layout>

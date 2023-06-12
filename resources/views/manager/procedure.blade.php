@@ -230,11 +230,11 @@
 					<table class="styled-table">
     					<thead>
         					<tr>
-								<th>Id</th>
+								
 								<th>Nom procédure </th>
-            					<th>fichier</th>
-                                <th>service_id</th>
-								<th>Action</th>
+            					
+                                <th>Service</th>
+								<th><center>Action</center></th>
        						 </tr>
     					</thead>
     				<tbody>
@@ -242,14 +242,14 @@
 						@foreach($procedure as $data)
         					
         					<tr class="active-row">
-								<td>{{$data->id}}</td>
+								
 								<td>{{$data->nom_procedure}}</td>
-                                <td>{{$data->file}}</td>
-								<td>{{$data->service_id}}</td>
-								<td>
+                                
+								<td>{{$service->where('id', $data->service_id)->pluck('nom_service')->first()}}</td>
+								<td><center>
 								<a href="{{url('delete_procedure',$data->id)}}" onclick="event.preventDefault(); showConfirmationModal({{$data->id}});"  class="btn">Supprimer</a>
 								<a href="{{url('update_procedure',$data->id)}}" class="btn">Modifier</a>
-								</td>
+							</center></td>
         					</tr>
 						@endforeach
 						@else

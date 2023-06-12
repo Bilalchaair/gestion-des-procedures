@@ -233,10 +233,10 @@ License: For each use you must have a valid license purchased only from above li
 					<table class="styled-table">
     					<thead>
         					<tr>
-								<th>Id</th>
+								
 								<th>Nom d'hôpital </th>
             					<th>Adresse</th>
-								<th>Action</th>
+								<th><center>Action</center></th>
        						 </tr>
     					</thead>
     				<tbody>
@@ -244,12 +244,13 @@ License: For each use you must have a valid license purchased only from above li
 						@foreach($hopital as $data)
         					
         					<tr class="active-row">
-								<td>{{$data->id}}</td>
+								
 								<td>{{$data->nom_hopital}}</td>
 								<td>{{$data->adresse}}</td>
-								<td>
+								<td><center>
 									<a href="{{url('delete_hopital',$data->id)}}" onclick="event.preventDefault(); showConfirmationModal({{$data->id}});" class="btn">Supprimer</a>
-									<a href="{{url('update_hopital',$data->id)}}" class="btn">Modifier</a>
+							         <a href="{{url('update_hopital',$data->id)}}" class="btn">Modifier</a>
+									</center>
 								</td>
         					</tr>
 						@endforeach

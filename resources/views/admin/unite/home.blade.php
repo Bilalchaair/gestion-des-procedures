@@ -267,10 +267,10 @@ License: For each use you must have a valid license purchased only from above li
 					<table class="styled-table">
     					<thead>
         					<tr>
-								<th>Id</th>
+								
 								<th>Nom unité </th>
             					<th>Service</th>
-								<th>Action</th>
+								<th><center>Action</center></th>
        						 </tr>
     					</thead>
     				<tbody>
@@ -278,13 +278,13 @@ License: For each use you must have a valid license purchased only from above li
 						@foreach($unite as $data)
         					
         					<tr class="active-row">
-								<td>{{$data->id}}</td>
+							
 								<td>{{$data->nom_unite}}</td>
-								<td>{{$data->service_id}}</td>
-								<td>
+								<td>{{$service->where('id', $data->service_id)->pluck('nom_service')->first()}}</td>
+								<td><center>
 								<a href="{{url('delete_unite',$data->id)}}" onclick="event.preventDefault(); showConfirmationModal({{$data->id}});" class="btn">Supprimer</a>
 								<a href="{{url('update_unite',$data->id)}}" class="btn">Modifier</a>
-								</td>
+							</center></td>
         					</tr>
 						@endforeach
 						@else
