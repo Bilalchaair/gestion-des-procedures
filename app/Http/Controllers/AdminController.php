@@ -10,6 +10,7 @@ use App\Models\Hopital;
 use App\Models\Division;
 use App\Models\Unite;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isNull;
 
 class AdminController extends Controller
 {
@@ -108,9 +109,10 @@ class AdminController extends Controller
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
           
+            if ($request->password == null){
 
             if ($request->usertype == 'manager' || $request->usertype == 'user' || $request->usertype == 'admin'  ){
-               if ($request->password == ''){
+             
                $data=user::find($id);
          $data->name=$request->name;
          $data->email=$request->email;
@@ -119,17 +121,9 @@ class AdminController extends Controller
          $data->service_id=null;
          $data->save();
          return redirect('users')->with('success','Utilisateur modifié');
-      }else{  $data=user::find($id);
-         $data->name=$request->name;
-         $data->email=$request->email;
-         $data->password = Hash::make($request->password);
-         $data->usertype=$request->usertype;
-         $data->fonction= null;
-         $data->service_id=null;
-         $data->save();
-         return redirect('users')->with('success','Utilisateur modifié');}
+
             }else if ($request->fonction == 'directeur' || $request->fonction == 'secretaire' ){
-               if ($request->password == ''){
+              
                $data=user::find($id);
                $data->name=$request->name;
                $data->email=$request->email;
@@ -139,43 +133,59 @@ class AdminController extends Controller
                $data->service_id=null;
                $data->save();
                return redirect('users')->with('success','Utilisateur modifié');
-               }else{ 
-                  if ($request->password == ''){
-                  $data=user::find($id);
-                  $data->name=$request->name;
-                  $data->email=$request->email;
-                  
-                  $data->usertype=$request->usertype;
-                  $data->fonction= $request->fonction;
-                  $data->service_id=null;
-                  $data->save();
-                  return redirect('users')->with('success','Utilisateur modifié');
-                  }else{
-                     $data=user::find($id);
-                     $data->name=$request->name;
-                     $data->email=$request->email;
-                     $data->password = Hash::make($request->password);
-                     $data->usertype=$request->usertype;
-                     $data->fonction= $request->fonction;
-                     $data->service_id=null;
-                     $data->save();
-                     return redirect('users')->with('success','Utilisateur modifié');
-                  }}
-            }else{
+           
+          } else {    
          $data=user::find($id);
          $data->name=$request->name;
          $data->email=$request->email;
-         $data->password = Hash::make($request->password);
+        
          $data->usertype=$request->usertype;
          $data->fonction=$request->fonction;
          $data->service_id=$request->service_id;
          $data->save();
-         return redirect('users')->with('success','Utilisateur modifié'); }}
-      } else {
+         return redirect('users')->with('success','Utilisateur modifié');
+      } }else{
+         if ($request->usertype == 'manager' || $request->usertype == 'user' || $request->usertype == 'admin'  ){
+             
+            $data=user::find($id);
+      $data->name=$request->name;
+      $data->email=$request->email;
+      $data->password = Hash::make($request->password);
+      $data->usertype=$request->usertype;
+      $data->fonction= null;
+      $data->service_id=null;
+      $data->save();
+      return redirect('users')->with('success','Utilisateur modifié');
+
+         }else if ($request->fonction == 'directeur' || $request->fonction == 'secretaire' ){
+           
+            $data=user::find($id);
+            $data->name=$request->name;
+            $data->email=$request->email;
+            $data->password = Hash::make($request->password);
+            $data->usertype=$request->usertype;
+            $data->fonction= $request->fonction;
+            $data->service_id=null;
+            $data->save();
+            return redirect('users')->with('success','Utilisateur modifié');
+        
+       } else {    
+      $data=user::find($id);
+      $data->name=$request->name;
+      $data->email=$request->email;
+      $data->password = Hash::make($request->password);
+      $data->usertype=$request->usertype;
+      $data->fonction=$request->fonction;
+      $data->service_id=$request->service_id;
+      $data->save();
+      return redirect('users')->with('success','Utilisateur modifié');
+   }
+      }}else {
           return view('welcome');
-      }
+      } 
 
    }
+}
   
    //CRUD hopital
    public function showhopital()
