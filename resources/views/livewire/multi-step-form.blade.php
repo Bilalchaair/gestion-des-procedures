@@ -6,8 +6,9 @@
 
 <div class="step-one">
     <div class="card">
-        <div class="card-title fw-bolder text-gray-800 fs-2 " style= " margin-left:3%" >STEP 1/8 - nom et fonction</div>
+        <div class="card-title fw-bolder text-gray-800 fs-2 " style= " margin-left:3%" >STEP 1/8 -Nom,fonction et Service</div>
         <div class="card-body">
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -24,6 +25,7 @@
 
                 <span class="text-danger">@error('fonction_redacteur'){{ $message }}@enderror</span>
             </div>
+           
             <br>
             <div class="form-group">
                 <label><strong>Service:</strong></label>

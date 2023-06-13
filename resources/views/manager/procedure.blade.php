@@ -219,11 +219,7 @@
 						
 						<div class="form-group">
 							<label for="name">Trier par Nom :</label>
-							<select name="name" id="name" class="form-control">
-								<option value="" @if(request()->name == '') selected @endif>Tous</option>
-								<option value="asc" @if(request()->name == 'asc') selected @endif>A-Z</option>
-								<option value="desc" @if(request()->name == 'desc') selected @endif>Z-A</option>
-							</select>
+							<input type="text" name="name" id="name" class="form-control" value="{{ request()->name }}" placeholder="Entrez le titre">
 						</div>
 						<button type="submit" class="btn btn-primary">Trier</button>
 					</form>

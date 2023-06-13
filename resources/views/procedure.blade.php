@@ -156,10 +156,11 @@
 </header>
 <style>#hospital-select,
 	#division-select,
-	#service-select {
+	#service-select,
+	#name{
 	  display: inline-block;
 	  margin-right: 10px;
-	  width:25%
+	  width:20%
 	}
 	#procedure-files{
 		display: flex;
@@ -184,6 +185,11 @@
 		<select id="service-select">
 			<option value="">Tous les Services</option>
 		</select>
+			
+	
+		
+			<input type="text" name="name" id="name" class="form-control" value="{{ request()->name }}" placeholder="Entrez le titre">
+		
 	
 		<button id="filter-button" class="btn btn-primary">Trier</button>
 	
@@ -222,21 +228,24 @@
             var selectedHospital = $('#hospital-select').val();
             var selectedDivision = $('#division-select').val();
             var selectedService = $('#service-select').val();
-
+			var searchQuery = $('#name').val();
             $.ajax({
                 url: '/procedurefiles',
                 type: 'GET',
                 data: {
                     hospitalId: selectedHospital,
                     divisionId: selectedDivision,
-                    serviceId: selectedService
+                    serviceId: selectedService,
+					name: searchQuery
                 },
                 success: function (response) {
                     $('#procedure-files').html(response);
                 }
             });
         });
-
+		$('#filter-button').click(function () {
+            updateProcedureFiles();
+        });
         $('#hospital-select').change(function () {
             var hospitalId = $(this).val();
             if (hospitalId) {
@@ -267,6 +276,12 @@
                 $('#service-select').html('<option value="">Tous les Services</option>');
             }
         });
+		$('#name').keyup(function () {
+            updateProcedureFiles(); // Update procedure files on each keystroke
+        });
+
+        // Initial procedure files update
+        updateProcedureFiles();
     });
 </script>
  

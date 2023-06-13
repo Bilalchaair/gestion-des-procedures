@@ -111,10 +111,8 @@ class ManagerController extends Controller
   
 
     // Apply sorting by name if selected
-    if ($name === 'asc') {
-        $query->orderBy('nom_procedure', 'asc');
-    } elseif ($name === 'desc') {
-        $query->orderBy('nom_procedure', 'desc');
+    if ($name) {
+        $query->where('nom_procedure', 'LIKE', "$name%");
     }
 
     $procedure = $query->paginate(5);

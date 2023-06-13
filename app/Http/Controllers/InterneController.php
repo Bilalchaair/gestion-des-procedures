@@ -208,10 +208,8 @@ class InterneController extends Controller
     }
 
     // Apply sorting by name if selected
-    if ($name === 'asc') {
-        $query->orderBy('nom_proc', 'asc');
-    } elseif ($name === 'desc') {
-        $query->orderBy('nom_proc', 'desc');
+    if ($name) {
+        $query->where('nom_proc', 'LIKE', "$name%");
     }
 
     $procedure = $query->paginate(3);

@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Procedure;
+use App\Models\User;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 
 class MultiStepForm extends Component
 {
     use WithFileUploads;
-
+    
     public $reference_code;
     public $date_creation;
     public $nom_redacteur;
@@ -135,6 +136,7 @@ class MultiStepForm extends Component
            $upload_logi = $this->logigramme->storeAs('Logigrammes', $logi_name);
            
         if($upload_logi){
+            $user = Auth::user();
             $values = array(
                 "nom_redacteur"=>$this->nom_redacteur,
                 "fonction_redacteur"=>$this->fonction_redacteur,

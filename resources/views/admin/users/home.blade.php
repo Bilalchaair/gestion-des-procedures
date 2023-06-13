@@ -246,11 +246,7 @@ License: For each use you must have a valid license purchased only from above li
 
 						<div class="form-group">
 							<label for="name">Trier par Nom :</label>
-							<select name="name" id="name" class="form-control">
-								<option value="" @if(request()->name == '') selected @endif>Tous</option>
-								<option value="asc" @if(request()->name == 'asc') selected @endif>A-Z</option>
-								<option value="desc" @if(request()->name == 'desc') selected @endif>Z-A</option>
-							</select>
+							<input type="text" name="name" id="name" class="form-control" value="{{ request()->name }}" placeholder="Entrez le nom">
 						</div>
 						<div class="form-group">
 							<label for="usertype">Trier par Type:</label>
@@ -271,13 +267,15 @@ License: For each use you must have a valid license purchased only from above li
             					<th>Email</th>
 								
 								<th>Type</th>
+								<th>Fonction</th>
+								<th>Service</th>
 								<th><center>Action</center></th>
        						 </tr>
     					</thead>
     				<tbody>
 						@if($User->count() > 0)
 					@foreach($User as $user)
-        					
+					@if($user->usertype !== 'admin')
         					<tr class="active-row">
 								
 								<td>{{$user->name}}</td>
@@ -292,11 +290,25 @@ License: For each use you must have a valid license purchased only from above li
 								  @elseif ($user->usertype == 'admin')
 									Administrateur
 								  @endif</td>
+								  <td>@if ($user->usertype =='manager'||$user->usertype =='user'||$user->usertype =='admin' ) <center>-</center> @else 
+									@if( $user->fonction == 'directeur')
+									Directeur général
+								  @elseif ( $user->fonction == 'secretaire')
+									Secretaire générale
+								  @elseif ( $user->fonction == 'chefservice')
+									Chef de service
+								  @elseif ( $user->fonction == 'collaborateur')
+									Collaborateur
+									@elseif ( $user->fonction == 'responsablequalite')
+									Responsable Qualité
+								  @endif   @endif</td>
+								  <td>@if ($user->usertype =='manager'||$user->usertype =='user'||$user->usertype =='admin' || $user->fonction =='directeur'|| $user->fonction =='secretaire') <center>-</center> @else {{$service->where('id', $user->service_id)->pluck('nom_service')->first()}}  @endif</td>
 								<td><center>
 									<a href="{{url('delete_user',$user->id)}}" onclick="event.preventDefault(); showConfirmationModal({{$user->id}});" class="btn">Supprimer</a>
 									<a href="{{url('update_user',$user->id)}}" class="btn">Modifier</a>
 								</center></td>
         					</tr>
+							@endif
 						@endforeach
 						@else
 						<tr>

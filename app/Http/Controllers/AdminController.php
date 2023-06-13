@@ -20,8 +20,9 @@ class AdminController extends Controller
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
             $User = User::paginate(5);
+            $service = Service::all();
             $usertypee='';
-            return view('admin.users.home' , compact('User','usertypee'));}
+            return view('admin.users.home' , compact('User','usertypee','service'));}
          } else {
              return view('welcome');
          }
@@ -31,7 +32,8 @@ class AdminController extends Controller
       if (Auth::check()) {
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
-            return view('admin.users.adduser');}
+            $service = Service::all();
+            return view('admin.users.adduser',compact('service'));}
          } else {
              return view('welcome');
          }
@@ -41,13 +43,37 @@ class AdminController extends Controller
       if (Auth::check()) {
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
+           
+            if ($request->usertype == 'manager' || $request->usertype == 'user' || $request->usertype == 'admin'  ){
+               $user=new user;
+         $user->name=$request->name;
+         $user->email=$request->email;
+         $user->password = Hash::make($request->password);
+         $user->usertype=$request->usertype;
+         $user->fonction= null;
+         $user->service_id=null;
+         $user->save();
+         return redirect('users')->with('success','Utilisateur ajoutée');
+            }else  if ($request->fonction == 'directeur' || $request->fonction == 'secretaire' ){
+               $user=new user;
+               $user->name=$request->name;
+               $user->email=$request->email;
+               $user->password = Hash::make($request->password);
+               $user->usertype=$request->usertype;
+               $user->fonction= $request->fonction;
+               $user->service_id=null;
+               $user->save();
+               return redirect('users')->with('success','Utilisateur ajoutée');
+            }else{
          $user=new user;
          $user->name=$request->name;
          $user->email=$request->email;
          $user->password = Hash::make($request->password);
          $user->usertype=$request->usertype;
+         $user->fonction=$request->fonction;
+         $user->service_id=$request->service_id;
          $user->save();
-         return redirect('users')->with('success','Utilisateur ajoutée');}
+         return redirect('users')->with('success','Utilisateur ajoutée');}}
       } else {
           return view('welcome');
       }
@@ -70,7 +96,8 @@ class AdminController extends Controller
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
          $user = User::find($id);
-         return view('admin.users.edituser',compact('user'));}
+         $service = Service::all();
+         return view('admin.users.edituser',compact('user','service'));}
       } else {
           return view('welcome');
       }
@@ -80,13 +107,70 @@ class AdminController extends Controller
       if (Auth::check()) {
          $usertype = Auth()->user()->usertype;
          if ($usertype == 'admin') {
+          
+
+            if ($request->usertype == 'manager' || $request->usertype == 'user' || $request->usertype == 'admin'  ){
+               if ($request->password == ''){
+               $data=user::find($id);
+         $data->name=$request->name;
+         $data->email=$request->email;
+         $data->usertype=$request->usertype;
+         $data->fonction= null;
+         $data->service_id=null;
+         $data->save();
+         return redirect('users')->with('success','Utilisateur modifié');
+      }else{  $data=user::find($id);
+         $data->name=$request->name;
+         $data->email=$request->email;
+         $data->password = Hash::make($request->password);
+         $data->usertype=$request->usertype;
+         $data->fonction= null;
+         $data->service_id=null;
+         $data->save();
+         return redirect('users')->with('success','Utilisateur modifié');}
+            }else if ($request->fonction == 'directeur' || $request->fonction == 'secretaire' ){
+               if ($request->password == ''){
+               $data=user::find($id);
+               $data->name=$request->name;
+               $data->email=$request->email;
+               
+               $data->usertype=$request->usertype;
+               $data->fonction= $request->fonction;
+               $data->service_id=null;
+               $data->save();
+               return redirect('users')->with('success','Utilisateur modifié');
+               }else{ 
+                  if ($request->password == ''){
+                  $data=user::find($id);
+                  $data->name=$request->name;
+                  $data->email=$request->email;
+                  
+                  $data->usertype=$request->usertype;
+                  $data->fonction= $request->fonction;
+                  $data->service_id=null;
+                  $data->save();
+                  return redirect('users')->with('success','Utilisateur modifié');
+                  }else{
+                     $data=user::find($id);
+                     $data->name=$request->name;
+                     $data->email=$request->email;
+                     $data->password = Hash::make($request->password);
+                     $data->usertype=$request->usertype;
+                     $data->fonction= $request->fonction;
+                     $data->service_id=null;
+                     $data->save();
+                     return redirect('users')->with('success','Utilisateur modifié');
+                  }}
+            }else{
          $data=user::find($id);
          $data->name=$request->name;
          $data->email=$request->email;
          $data->password = Hash::make($request->password);
          $data->usertype=$request->usertype;
+         $data->fonction=$request->fonction;
+         $data->service_id=$request->service_id;
          $data->save();
-         return redirect('users')->with('success','Utilisateur modifié');}
+         return redirect('users')->with('success','Utilisateur modifié'); }}
       } else {
           return view('welcome');
       }
@@ -416,17 +500,15 @@ public function filterUsers(Request $request)
     // Apply service filter if selected
   
     // Apply sorting by name if selected
-    if ($name === 'asc') {
-        $query->orderBy('name', 'asc');
-    } elseif ($name === 'desc') {
-        $query->orderBy('name', 'desc');
-    }
+    if ($name) {
+      $query->where('name', 'LIKE', "$name%");
+  }
 
     $User = $query->paginate(5);
-    
+    $service = Service::all();
     
 
-    return view('admin.users.home', compact('User', 'usertypee'));
+    return view('admin.users.home', compact('User', 'usertypee','service'));
 }
 public function filterDivision(Request $request)
 {
@@ -481,8 +563,9 @@ public function filterService(Request $request)
     $service = $query->paginate(5);
     
     $division = Division::all();
+    $hopital = Hopital::all();
 
-    return view('admin.service.home', compact('service', 'division','divisionId'));
+    return view('admin.service.home', compact('service', 'division','divisionId','hopital'));
 }
 public function filterUnite(Request $request)
 {

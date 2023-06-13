@@ -307,6 +307,9 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Root-->
         <!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<style> td{
+				width: 25%;
+			}</style>
 			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
 			<span class="svg-icon">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -392,7 +395,7 @@ function closeConfirmationModal() {
 function confirmDelete() {
     var modal = document.getElementById('confirmationModal');
     modal.style.display = 'none';
-    window.location.href = "{{ url('delete_division') }}/" + deleteId;
+    window.location.href = "{{ url('delete_service') }}/" + deleteId;
 }
 </script>
 	

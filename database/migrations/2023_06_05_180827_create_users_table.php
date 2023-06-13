@@ -18,7 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('usertype')->default('user');
-           
+            $table->string('fonction')->nullable();
+            $table->unsignedBigInteger('service_id')->nullable(); // Nullable foreign key
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();
         });

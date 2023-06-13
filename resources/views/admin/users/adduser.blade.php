@@ -238,12 +238,31 @@ License: For each use you must have a valid license purchased only from above li
                                     </div>
                                     <div class="labels">
                                         <label>Type d'utilisateur :</label>
-                                        <select name="usertype"  >
-                                            <option value="admin">administrateur</option>
-                                            <option value="manager">manager</option>
+                                        <select name="usertype" onchange="toggleFonction(this.value)"  >
+											
                                             <option value="user">externe</option>
-                                            <option value="user1">interne</option>
+											<option value="user1">interne</option>
+                                            <option value="manager">manager</option>
+											<option value="admin">administrateur</option>
                                         </select>
+                                    </div>
+									<div class="labels" id="fonction-label" style="display: none;" >
+                                        <label>Fonction de l'utilisateur :</label>
+                                        <select name="fonction" onchange="toggleService(this.value)" >
+											<option value="directeur">Directeur général</option>
+                                            <option value="chefservice">Chef de service</option>
+                                            <option value="secretaire">Secrétaire général</option>
+                                            <option value="collaborateur">Collaborateur</option>
+											<option value="responsablequalite">Responsable Qualité</option>
+                                        </select>
+                                    </div>
+									<div class="labels" id="service-label" style="display: none;">
+                                        <label>Service :</label>
+                                        <select name="service_id"  >
+											@foreach($service as $data)
+												<option value="{{$data->id}}">{{$data->nom_service}}</option>
+											@endforeach	
+											</select>
                                     </div>
                                     <div >
                                     <input type="submit" value="Ajouter" class="submit">
@@ -273,6 +292,27 @@ License: For each use you must have a valid license purchased only from above li
 			</span>
 			<!--end::Svg Icon-->
 		</div>
+		<script>
+			  function toggleFonction(value) {
+        var fonctionLabel = document.getElementById('fonction-label');
+        if (value === 'user1') {
+            fonctionLabel.style.display = 'block';
+        } else {
+            fonctionLabel.style.display = 'none';
+            // Hide service label if it's currently shown
+            document.getElementById('service-label').style.display = 'none';
+        }
+    }
+
+    function toggleService(value) {
+        var serviceLabel = document.getElementById('service-label');
+        if (value === 'collaborateur' || value === 'chefservice' || value === 'responsablequalite') {
+            serviceLabel.style.display = 'block';
+        } else {
+            serviceLabel.style.display = 'none';
+        }
+    }
+		</script>
 		<!--end::Scrolltop-->
 		<!--end::Main-->
 		<script>var hostUrl = "adminassets/dist/assets/";</script>

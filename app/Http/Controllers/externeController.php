@@ -106,13 +106,16 @@ class ExterneController extends Controller
        $hospitalId = $request->input('hospitalId');
        $divisionId = $request->input('divisionId');
        $serviceId = $request->input('serviceId');
-   
+       $name = $request->input('name');
        $procedurefiles = ProcedureFile::query();
    
 
 
     if ($serviceId) {
         $procedurefiles->where('service_id', $serviceId);
+    }
+    if ($name) {
+        $procedurefiles->where('nom_procedure', 'LIKE', "$name%");
     }
 
        $procedurefiles = $procedurefiles->get();

@@ -217,11 +217,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Trier par Titre :</label>
-                                <select name="name" id="name" class="form-control">
-                                    <option value="" @if(request()->name == '') selected @endif>Tous</option>
-                                    <option value="asc" @if(request()->name == 'asc') selected @endif>A-Z</option>
-                                    <option value="desc" @if(request()->name == 'desc') selected @endif>Z-A</option>
-                                </select>
+								<input type="text" name="name" id="name" class="form-control" value="{{ request()->name }}" placeholder="Entrez le titre">
                             </div>
                             <button type="submit" class="btn btn-primary">Trier</button>
                         </form>
@@ -238,6 +234,7 @@
 								</tr>
 							</thead>
 							<tbody>
+								
 								@if($procedure->count() > 0)
 								@foreach($procedure as $rs)
 									<tr>
@@ -249,12 +246,20 @@
 										<td class="align-middle">
 											<div class="btn-group" role="group" aria-label="Basic example">
 												<a href="{{url('viewprocedure',$rs->id)}}" type="button" class="btn btn-secondary">Details</a>
+												@if ($rs->nom_redacteur === Auth::user()->name || ('chefservice' === Auth::user()->fonction && Auth::user()->service_id === $rs->service_id) || 'directeur' === Auth::user()->fonction)
 												<a href="{{url('modifierprocedure',$rs->id)}}" type="button" class="btn btn-warning">Modifier</a>
-												<a href="{{url('delete_proc',$rs->id)}}" type="button" onclick="event.preventDefault(); showConfirmationModal({{$rs->id}});" class="btn btn-danger">Supprimer</a>
+												@endif
+												@if ($rs->nom_redacteur === Auth::user()->name || ('chefservice' === Auth::user()->fonction && Auth::user()->service_id === $rs->service_id) || 'directeur' === Auth::user()->fonction)
+												 <a href="{{url('delete_proc',$rs->id)}}" type="button" onclick="event.preventDefault(); showConfirmationModal({{$rs->id}});" class="btn btn-danger">Supprimer</a>
+												 @endif
+												 @if (('chefservice' === Auth::user()->fonction && Auth::user()->service_id === $rs->service_id) || 'directeur' === Auth::user()->fonction ||  'secretaire' === Auth::user()->fonction || 'responsablequalite' === Auth::user()->fonction)
 												<a href="{{url('verifierprocedure',$rs->id)}}" type="button" class="btn btn-info">Vérifier</a>
+												@endif
+												@if (('chefservice' === Auth::user()->fonction && Auth::user()->service_id === $rs->service_id) || 'directeur' === Auth::user()->fonction)
 												<a href="{{url('approuverprocedure',$rs->id)}}" type="button" class="btn btn-success">Approuver</a>
+												@endif
 												@if (!is_null($rs->nom_ver)  && !is_null($rs->nom_app))
-												<a href="{{url('exporterprocedure',$rs->id)}}" type="button" class="btn btn-secondary">exporter</a>
+												<a href="{{url('exporterprocedure',$rs->id)}}" type="button" class="btn btn-secondary">Télécharger</a>
 												@endif
 
 											</div>
