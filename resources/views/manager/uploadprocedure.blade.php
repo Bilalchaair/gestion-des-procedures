@@ -191,11 +191,11 @@
                                          @csrf
                                     <div class="labels">
                                         <label>Nom de la procédure :</label>
-                                        <input type="text" name="nom_procedure">
+                                        <input type="text" name="nom_procedure" required>
                                     </div>
                                     <div class="labels">
                                         <label>fichier :</label>
-                                        <input type="file" name="file">
+                                        <input type="file" name="file" required>
                                     </div>
                                     <div class="labels">
 										<select name="service_id"  >

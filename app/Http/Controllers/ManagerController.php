@@ -79,8 +79,14 @@ class ManagerController extends Controller
     public function edit_procedure(Request $request,$id)
     {
         if (Auth::check()) {
+            
             $usertype = Auth()->user()->usertype;
             if ($usertype == 'manager') {
+                if($request->file == null){ $procedure= procedurefile::find($id);
+                    $procedure->nom_procedure=$request->nom_procedure;
+                    $procedure->service_id=$request->service_id;
+                    $procedure->save();
+                    return redirect('upload_procedure')->with('success','Procédure modifiée');}else{
             $procedure= procedurefile::find($id);
             $procedure->nom_procedure=$request->nom_procedure;
             $file=$request->file;
@@ -89,7 +95,7 @@ class ManagerController extends Controller
                 $procedure->file=$filename;
             $procedure->service_id=$request->service_id;
             $procedure->save();
-            return redirect('upload_procedure')->with('success','Procédure modifiée');}
+            return redirect('upload_procedure')->with('success','Procédure modifiée');}}
         } else {
         return view('welcome');
         }
