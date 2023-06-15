@@ -40,8 +40,8 @@
 							<!--begin::Header Logo-->
 							<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
 								<a href="#">
-									<img alt="Logo" src="<?php echo asset('assets/chulogo.png') ?>" class="h-15px h-lg-50px logo-default" />
-									<img alt="Logo" src="<?php echo asset('assets/chulogo.png') ?>" class="h-15px h-lg-50px logo-sticky" />
+									<img alt="Logo" src="<?php echo asset('assets/logochu-new.png') ?>" class="h-15px h-lg-50px logo-default" />
+									<img alt="Logo" src="<?php echo asset('assets/logochu-new.png') ?>" class="h-15px h-lg-50px logo-sticky" />
 								</a>
 							</div>
 							<!--end::Header Logo-->

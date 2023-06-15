@@ -20,7 +20,7 @@
 <header class="header-area overlay">
     <nav class="navbar navbar-expand-md navbar-dark">
 		<div class="container">
-			<img style="width: 50px;" class="navbar-brand" src="assets/chu-new.png" alt="">
+			<img style="width: 50px;" class="navbar-brand" src="assets/logochu-new.png" alt="">
 			
 			
 			<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#main-nav">

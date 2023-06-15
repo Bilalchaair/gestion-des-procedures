@@ -174,7 +174,7 @@ img{
         </tr>
         <tr>
           <td>{{$procedure->nom_proc}}</td>
-          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 2/5</td>
         </tr>
       </table>
 	  <br>
@@ -218,7 +218,7 @@ img{
         </tr>
         <tr>
           <td>{{$procedure->nom_proc}}</td>
-          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 3/5</td>
         </tr>
       </table>
 	  <br>
@@ -242,7 +242,7 @@ img{
         </tr>
         <tr>
           <td>{{$procedure->nom_proc}}</td>
-          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 4/5</td>
         </tr>
       </table>
 	  <br> 
@@ -264,7 +264,7 @@ img{
         </tr>
         <tr>
           <td>{{$procedure->nom_proc}}</td>
-          <td>Date : {{$procedure->date_creation}}  <br> Page : 1/5</td>
+          <td>Date : {{$procedure->date_creation}}  <br> Page : 5/5</td>
         </tr>
       </table>
 	  <br>
